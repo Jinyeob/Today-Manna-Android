@@ -66,14 +66,16 @@ public class SaveSharedPreference {
 ```
 ## 스크린샷
 <div>
+  
 #### 로그인
-<img src="https://user-images.githubusercontent.com/37360089/71324459-20586080-2522-11ea-9b6d-da7cb8d17e86.jpg"></img>
+<center><img src="https://user-images.githubusercontent.com/37360089/71324459-20586080-2522-11ea-9b6d-da7cb8d17e86.jpg" width="40%"></img></center>
 
 #### 메인 화면
-<img src="https://user-images.githubusercontent.com/37360089/71324462-22222400-2522-11ea-88b1-b4d00edbdbe1.jpg"></img>
+<center><img src="https://user-images.githubusercontent.com/37360089/71324462-22222400-2522-11ea-88b1-b4d00edbdbe1.jpg" width="40%"></img></center>
 
 #### 버튼 클릭 후
-<img src="https://user-images.githubusercontent.com/37360089/71324463-23535100-2522-11ea-90a6-3987fdc8c3e2.jpg"></img>
+<center><img src="https://user-images.githubusercontent.com/37360089/71324463-23535100-2522-11ea-90a6-3987fdc8c3e2.jpg" width="40%"></img></center>
+
 </div>
 
 ## 출처
