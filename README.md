@@ -1,7 +1,7 @@
 # Today_manna
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.
 
-## 기능 (업데이트 중)
+## 기능 (업데이트 중 - 12.23)
 * 로그인
 * 로그인 자동저장
 * 파싱 후 날짜, 만나 범위 출력
@@ -48,7 +48,7 @@ public class SaveSharedPreference {
 
         editor.commit();
     }
-
+\
     // 저장된 정보 가져오기
     public static String getUserName(Context ctx) {
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
@@ -64,6 +64,27 @@ public class SaveSharedPreference {
     }
 }
 ```
+
+#### 로그인 실패 처리
+* 파싱한 결과 값(htmlContentInStringFormat, viewPageUrl)이 없을 때(\"\"),  토스트 및 로그인 화면으로 전환
+* 쓰레드 내부에 토스트 출력 시 java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare() 뜸 -> 핸들러로 해결.
+```java
+ if(htmlContentInStringFormat.equals("")||viewPageUrl.equals("")){
+                    Handler mHandler = new Handler(Looper.getMainLooper());
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this,"로그인 실패, 다시 로그인 해주세요.",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            SaveSharedPreference.clearUser(MainActivity.this);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 0);
+                }
+
+```
+
 ## 스크린샷
 <div>
   
