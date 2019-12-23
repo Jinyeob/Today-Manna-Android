@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.WebView;
@@ -35,6 +37,7 @@ import java.io.BufferedInputStream;
 
 public class MainActivity extends AppCompatActivity {
     private String htmlPageUrl = "https://community.jbch.org/confirm.php";
+    private JsoupAsyncTask jsoupAsyncTask;
     private TextView textviewHtmlDocument;
     private String viewPageUrl = "";
     Bitmap bm;
@@ -62,7 +65,7 @@ String PASSWD="";
         System.out.println("@@@@ ID = "+ID);
         System.out.println("@@@@ PASSWD = "+PASSWD);
 
-        JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+        jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
 
         //새로고침
@@ -85,6 +88,7 @@ String PASSWD="";
             }
         });
 */
+        //다시로그인
         reLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -114,6 +118,8 @@ String PASSWD="";
                         .data("go", "yes")
                         .data("url", "http://community.jbch.org/")
                         .data("LoginButton", "LoginButton")
+                        .timeout(5000)
+                        .maxBodySize(0)
                         .method(Connection.Method.POST)
                         .execute();
 
@@ -126,6 +132,7 @@ String PASSWD="";
                 Elements contentATags = doc.select("div.conbox.active img");
 
                 System.out.println("-------------------------------------------------------------");
+
                 for (Element e : titles) {
                     System.out.println("title: " + e.text());
                     htmlContentInStringFormat += e.text().trim() + "\n";
@@ -133,6 +140,19 @@ String PASSWD="";
 
                 viewPageUrl = contentATags.attr("abs:src");
                 System.out.println(viewPageUrl);
+                if(htmlContentInStringFormat.equals("")||viewPageUrl.equals("")){
+                    Handler mHandler = new Handler(Looper.getMainLooper());
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this,"로그인 실패, 다시 로그인 해주세요.",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            SaveSharedPreference.clearUser(MainActivity.this);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 0);
+                }
                 System.out.println("-------------------------------------------------------------");
 
             } catch (IOException e) {
