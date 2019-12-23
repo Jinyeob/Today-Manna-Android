@@ -28,6 +28,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.BufferedInputStream;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +52,8 @@ String PASSWD="";
         textviewHtmlDocument = (TextView) findViewById(R.id.textView);
         textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
 
-        final Button htmlTitleButton = (Button) findViewById(R.id.button);
+        FloatingActionButton fab=findViewById(R.id.floatingActionButton2);
+     //   final Button htmlTitleButton = (Button) findViewById(R.id.button);
         final Button reLogin = (Button) findViewById(R.id.button2);
 
         Intent loginIntent=getIntent();
@@ -58,7 +62,19 @@ String PASSWD="";
         System.out.println("@@@@ ID = "+ID);
         System.out.println("@@@@ PASSWD = "+PASSWD);
 
+        JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+        jsoupAsyncTask.execute();
 
+        //새로고침
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+                jsoupAsyncTask.execute();
+            }
+        });
+
+/*
         htmlTitleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,11 +84,12 @@ String PASSWD="";
                 //htmlTitleButton.setVisibility(View.GONE);
             }
         });
-
+*/
         reLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                SaveSharedPreference.clearUser(MainActivity.this);
                 startActivity(intent);
                 finish();
             }

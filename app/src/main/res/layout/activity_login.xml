@@ -53,4 +53,13 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="깨사모 아이디, 비밀번호 입력해주세요"
+        app:layout_constraintBottom_toTopOf="@+id/editText_id"
+        app:layout_constraintStart_toStartOf="@+id/editText_id" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
