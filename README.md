@@ -1,10 +1,11 @@
 # Today_manna
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.
 
-## 기능 (업데이트 중 - 12.23)
+## 기능 (업데이트 중 - 12.27)
 * 로그인
 * 로그인 자동저장
 * 파싱 후 날짜, 만나 범위 출력
+* 로그인 실패 exception 추가 (토스트)
 
 ## 기능 설명
 
@@ -89,13 +90,13 @@ public class SaveSharedPreference {
 <div>
   
 #### 로그인
-<center><img src="https://user-images.githubusercontent.com/37360089/71324459-20586080-2522-11ea-9b6d-da7cb8d17e86.jpg" width="40%"></img></center>
+<img src="https://user-images.githubusercontent.com/37360089/71512758-f1077200-28da-11ea-8183-6bb25e56f047.jpg" width="40%"></img>
+
+#### 로그인 실패
+<img src="https://user-images.githubusercontent.com/37360089/71512765-f2d13580-28da-11ea-947a-a597787b4d05.jpg" width="40%"></img>
 
 #### 메인 화면
-<center><img src="https://user-images.githubusercontent.com/37360089/71324462-22222400-2522-11ea-88b1-b4d00edbdbe1.jpg" width="40%"></img></center>
-
-#### 버튼 클릭 후
-<center><img src="https://user-images.githubusercontent.com/37360089/71324463-23535100-2522-11ea-90a6-3987fdc8c3e2.jpg" width="40%"></img></center>
+<img src="https://user-images.githubusercontent.com/37360089/71512767-f4026280-28da-11ea-8618-1c130cab6f69.jpg" width="40%"></img>
 
 </div>
 
