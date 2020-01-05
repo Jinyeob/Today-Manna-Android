@@ -1,4 +1,4 @@
-package com.example.parsing2;
+package com.manna.parsing2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,6 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.jsoup.Connection;
@@ -19,21 +18,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.util.HashMap;
 import java.util.Map;
-import java.net.URL;
-import java.net.URLConnection;
+
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.io.BufferedInputStream;
 
 public class MainActivity extends AppCompatActivity {
     private String htmlPageUrl = "https://community.jbch.org/confirm.php";

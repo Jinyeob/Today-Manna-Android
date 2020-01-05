@@ -1,4 +1,4 @@
-package com.example.parsing2;
+package com.manna.parsing2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
