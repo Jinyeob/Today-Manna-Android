@@ -1,10 +1,11 @@
 # Today_manna
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.
 
-## 기능 (업데이트 중)
+## 기능 (업데이트 중 - 12.27)
 * 로그인
 * 로그인 자동저장
 * 파싱 후 날짜, 만나 범위 출력
+* 로그인 실패 exception 추가 (토스트)
 
 ## 기능 설명
 
@@ -48,7 +49,7 @@ public class SaveSharedPreference {
 
         editor.commit();
     }
-
+\
     // 저장된 정보 가져오기
     public static String getUserName(Context ctx) {
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
@@ -64,17 +65,38 @@ public class SaveSharedPreference {
     }
 }
 ```
+
+#### 로그인 실패 처리
+* 파싱한 결과 값(htmlContentInStringFormat, viewPageUrl)이 없을 때(\"\"),  토스트 및 로그인 화면으로 전환
+* 쓰레드 내부에 토스트 출력 시 java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare() 뜸 -> 핸들러로 해결.
+```java
+ if(htmlContentInStringFormat.equals("")||viewPageUrl.equals("")){
+                    Handler mHandler = new Handler(Looper.getMainLooper());
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this,"로그인 실패, 다시 로그인 해주세요.",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            SaveSharedPreference.clearUser(MainActivity.this);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 0);
+                }
+
+```
+
 ## 스크린샷
 <div>
   
 #### 로그인
-<center><img src="https://user-images.githubusercontent.com/37360089/71324459-20586080-2522-11ea-9b6d-da7cb8d17e86.jpg" width="40%"></img></center>
+<img src="https://user-images.githubusercontent.com/37360089/71512758-f1077200-28da-11ea-8183-6bb25e56f047.jpg" width="40%"></img>
+
+#### 로그인 실패
+<img src="https://user-images.githubusercontent.com/37360089/71512765-f2d13580-28da-11ea-947a-a597787b4d05.jpg" width="40%"></img>
 
 #### 메인 화면
-<center><img src="https://user-images.githubusercontent.com/37360089/71324462-22222400-2522-11ea-88b1-b4d00edbdbe1.jpg" width="40%"></img></center>
-
-#### 버튼 클릭 후
-<center><img src="https://user-images.githubusercontent.com/37360089/71324463-23535100-2522-11ea-90a6-3987fdc8c3e2.jpg" width="40%"></img></center>
+<img src="https://user-images.githubusercontent.com/37360089/71512767-f4026280-28da-11ea-8618-1c130cab6f69.jpg" width="40%"></img>
 
 </div>
 
