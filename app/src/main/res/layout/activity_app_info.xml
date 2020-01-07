@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app_info">
+    android:orientation="vertical"
+    tools:context=".app_info"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="245dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
         android:text="제작자: 김진엽"
-        android:textSize="14pt"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="151dp"
-        android:text="문의: jinyeob07@gmail.com"
-        android:textSize="9pt"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:text="Copyright 2020. jinyeob. All rights reserved."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        android:textSize="12pt" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="81dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
         android:text="소속: 일산교회 청년회"
-        android:textSize="14pt"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="12pt" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="문의: jinyeob07@gmail.com"
+        android:textSize="12pt" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="버전: 1.4"
+        android:textSize="12pt" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:text="Copyright 2020. jinyeob. All rights reserved."
+        android:textSize="6pt" />
+
+</LinearLayout>
