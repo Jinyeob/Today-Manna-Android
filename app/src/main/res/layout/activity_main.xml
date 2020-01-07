@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#FFFFFFFF"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,28 +28,24 @@
             android:layout_height="wrap_content"
             android:text="3초만 기다려주세요 \n(혹시 안되면 다시 로그인 해보세요!)" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="다시 로그인" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="188dp"
+        android:layout_height="224dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="50dp"
+            android:gravity="center"
             android:text="날짜" />
 
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
-            android:layout_height="127dp" />
+            android:layout_height="155dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,35 +61,6 @@
             android:clickable="true"
             app:srcCompat="@android:drawable/ic_popup_sync" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="새로고침" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="257dp"
-        android:gravity="bottom">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="223dp"
-            android:layout_height="21dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="231dp"
-            android:layout_marginEnd="78dp"
-            android:layout_marginRight="78dp"
-            android:layout_marginBottom="5dp"
-            android:text="문의: jiyeob07@gmail.com, ver1.3" />
-    </RelativeLayout>
 
 </LinearLayout>

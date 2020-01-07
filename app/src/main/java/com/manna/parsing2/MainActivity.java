@@ -1,6 +1,7 @@
 package com.manna.parsing2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -41,14 +44,16 @@ String PASSWD="";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.myAppName);
+        setSupportActionBar(toolbar);
+
         webView = (WebView) findViewById(R.id.webView);
 
         textviewHtmlDocument = (TextView) findViewById(R.id.textView);
         textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
 
         FloatingActionButton fab=findViewById(R.id.floatingActionButton2);
-     //   final Button htmlTitleButton = (Button) findViewById(R.id.button);
-        final Button reLogin = (Button) findViewById(R.id.button2);
 
         Intent loginIntent=getIntent();
         ID=loginIntent.getStringExtra("id");
@@ -58,35 +63,13 @@ String PASSWD="";
 
         jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
-
         //새로고침
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
                 JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
                 jsoupAsyncTask.execute();
-            }
-        });
-
-/*
-        htmlTitleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
-                jsoupAsyncTask.execute();
-                htmlTitleButton.setEnabled(false);
-                //htmlTitleButton.setVisibility(View.GONE);
-            }
-        });
-*/
-        //다시로그인
-        reLogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                SaveSharedPreference.clearUser(MainActivity.this);
-                startActivity(intent);
-                finish();
             }
         });
     }
@@ -156,6 +139,37 @@ String PASSWD="";
         protected void onPostExecute(Void result) {
            textviewHtmlDocument.setText(htmlContentInStringFormat);
            webView.loadUrl(viewPageUrl);
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.info :
+                Intent intent1 = new Intent(getApplicationContext(), app_info.class);
+                startActivity(intent1);
+                return true;
+            case R.id.re_login :
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                SaveSharedPreference.clearUser(MainActivity.this);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.refresh :
+                Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
+                JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+                jsoupAsyncTask.execute();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
