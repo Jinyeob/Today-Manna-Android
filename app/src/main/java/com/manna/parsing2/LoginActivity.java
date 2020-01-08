@@ -34,6 +34,12 @@ public class LoginActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.myAppName);
         setSupportActionBar(toolbar);
 
+        if(SaveSharedPreference.getUserName(LoginActivity.this).length() != 0 && SaveSharedPreference.getUserPasswd(LoginActivity.this).length() != 0) {
+            idView.setText(SaveSharedPreference.getUserName(this).toString());
+            passwdView.setText(SaveSharedPreference.getUserPasswd(this).toString());
+            autoLogin.setChecked(true);
+        }
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

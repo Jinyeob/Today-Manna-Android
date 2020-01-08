@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/back_color">
 
     <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
@@ -26,7 +27,7 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3초만 기다려주세요 \n(혹시 안되면 다시 로그인 해보세요!)" />
+            android:text="Please wait up to 3 seconds" />
 
     </LinearLayout>
 

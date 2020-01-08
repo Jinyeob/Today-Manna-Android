@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,6 +24,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 import android.graphics.Bitmap;
@@ -37,36 +42,60 @@ public class MainActivity extends AppCompatActivity {
     Bitmap bm;
     private WebView webView;
     private String htmlContentInStringFormat = "";
-String ID="";
-String PASSWD="";
+    String ID = "";
+    String PASSWD = "";
+
+    private TextView info_text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        //툴바
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.myAppName);
         setSupportActionBar(toolbar);
 
-        webView = (WebView) findViewById(R.id.webView);
+        //일요일일때
+        Date currentTime= Calendar.getInstance().getTime();
+        SimpleDateFormat weekdayFormat = new SimpleDateFormat("EE", Locale.getDefault());
+        String weekDay = weekdayFormat.format(currentTime);
+        if(weekDay.equals("일")){
+            Toast.makeText(MainActivity.this, "일요일은 지원하지 않습니다.", Toast.LENGTH_LONG).show();
+            Intent intent__ = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent__);
+            finish();
+        }
 
+        //맨위 안내 텍스트뷰
+        info_text = (TextView) findViewById(R.id.textView5);
+
+        //날짜 텍스트뷰
         textviewHtmlDocument = (TextView) findViewById(R.id.textView);
         textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
 
-        FloatingActionButton fab=findViewById(R.id.floatingActionButton2);
+        //만나범위 웹뷰
+        webView = (WebView) findViewById(R.id.webView);
 
-        Intent loginIntent=getIntent();
-        ID=loginIntent.getStringExtra("id");
-        PASSWD=loginIntent.getStringExtra("passwd");
-        System.out.println("@@@@ ID = "+ID);
-        System.out.println("@@@@ PASSWD = "+PASSWD);
+        //새로고침 아이콘
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
 
+        //로그인 정보
+        Intent loginIntent = getIntent();
+        ID = loginIntent.getStringExtra("id");
+        PASSWD = loginIntent.getStringExtra("passwd");
+        System.out.println("@@@@ ID = " + ID);
+        System.out.println("@@@@ PASSWD = " + PASSWD);
+
+        //파싱 시작
         jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
-        //새로고침
-        fab.setOnClickListener(new View.OnClickListener(){
+
+        //새로고침 아이콘 이벤트리스너
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
                 JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
                 jsoupAsyncTask.execute();
@@ -114,12 +143,12 @@ String PASSWD="";
 
                 viewPageUrl = contentATags.attr("abs:src");
                 System.out.println(viewPageUrl);
-                if(htmlContentInStringFormat.equals("")||viewPageUrl.equals("")){
+                if (htmlContentInStringFormat.equals("") || viewPageUrl.equals("")) {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(MainActivity.this,"로그인 실패, 다시 로그인 해주세요.",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "로그인 실패, 다시 로그인 해주세요.", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             SaveSharedPreference.clearUser(MainActivity.this);
                             startActivity(intent);
@@ -137,33 +166,33 @@ String PASSWD="";
 
         @Override
         protected void onPostExecute(Void result) {
-           textviewHtmlDocument.setText(htmlContentInStringFormat);
-           webView.loadUrl(viewPageUrl);
+            textviewHtmlDocument.setText(htmlContentInStringFormat);
+            webView.loadUrl(viewPageUrl);
+            info_text.setText("오늘도 주님과 화이팅!");
         }
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
 
         return true;
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.info :
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.info:
                 Intent intent1 = new Intent(getApplicationContext(), app_info.class);
                 startActivity(intent1);
                 return true;
-            case R.id.re_login :
+            case R.id.re_login:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 SaveSharedPreference.clearUser(MainActivity.this);
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.refresh :
+            case R.id.refresh:
                 Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
                 JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
                 jsoupAsyncTask.execute();
