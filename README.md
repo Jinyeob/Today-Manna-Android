@@ -1,11 +1,15 @@
 # Today_manna
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.
 
-## 기능 (업데이트 중 - 12.27)
+## 기능 (업데이트 중 - 1/8)
 * 로그인
 * 로그인 자동저장
 * 파싱 후 날짜, 만나 범위 출력
 * 로그인 실패 exception 추가 (토스트)
+* 노액션바, 툴바로 바꿈 (색상: 흰색)
+* 버튼 기능 -> 툴바 메뉴로 옮김
+* 디자인개선
+* 새로고침 시, 날짜가 중복돼서 출력되는 현상 해결
 
 ## 기능 설명
 
@@ -87,18 +91,18 @@ public class SaveSharedPreference {
 ```
 
 ## 스크린샷
-<div>
-  
-#### 로그인
-<img src="https://user-images.githubusercontent.com/37360089/71512758-f1077200-28da-11ea-8183-6bb25e56f047.jpg" width="40%"></img>
 
-#### 로그인 실패
-<img src="https://user-images.githubusercontent.com/37360089/71512765-f2d13580-28da-11ea-947a-a597787b4d05.jpg" width="40%"></img>
+| <center>로그인</center> | <center>로그인 실패</center> |
+|:--------:|:--------:|
+| <img src="https://user-images.githubusercontent.com/37360089/71947640-e0c39100-3210-11ea-9238-e18f4f95d63c.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71947650-e325eb00-3210-11ea-9024-3a11d262500e.jpg" width="70%"></img> |
 
-#### 메인 화면
-<img src="https://user-images.githubusercontent.com/37360089/71512767-f4026280-28da-11ea-8618-1c130cab6f69.jpg" width="40%"></img>
+| <center>메인 화면</center> | <center>메뉴</center> |
+|:--------:|:--------:|
+| <img src="https://user-images.githubusercontent.com/37360089/71947644-e15c2780-3210-11ea-8a76-2241b27c6e0d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img> |
 
-</div>
+| 앱 정보 (i 아이콘) | 새로고침 |
+|:--------:|:--------:|
+| <img src="https://user-images.githubusercontent.com/37360089/71947642-e0c39100-3210-11ea-8eb5-69a9e36323ce.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71948382-300ac100-3213-11ea-866f-2dcce579d2e9.jpg" width="70%"></img> |
 
 ## 출처
 * 파싱: https://partnerjun.tistory.com/43?category=693285/
