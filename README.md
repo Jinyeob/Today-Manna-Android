@@ -101,9 +101,9 @@ public class SaveSharedPreference {
 | <center><img src="https://user-images.githubusercontent.com/37360089/71947644-e15c2780-3210-11ea-8a76-2241b27c6e0d.jpg" width="70%"></img></center> | <center><img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img>
 </center> |
 
-| <center>앱정보 (i 아이콘)</center> | <center>메뉴</center> |
+| <center>앱 정보 (i 아이콘)</center> | <center>새로고침</center> |
 |:--------:|:--------:|
-| <center><img src="https://user-images.githubusercontent.com/37360089/71947642-e0c39100-3210-11ea-8eb5-69a9e36323ce.jpg" width="70%"></img></center> |
+| <center><img src="https://user-images.githubusercontent.com/37360089/71947642-e0c39100-3210-11ea-8eb5-69a9e36323ce.jpg" width="70%"></img></center> | <img src="https://user-images.githubusercontent.com/37360089/71948382-300ac100-3213-11ea-866f-2dcce579d2e9.jpg" width="70%"></img> |
 
 ## 출처
 * 파싱: https://partnerjun.tistory.com/43?category=693285/
