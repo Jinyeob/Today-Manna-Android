@@ -91,22 +91,19 @@ public class SaveSharedPreference {
 ```
 
 ## 스크린샷
-<div>
-  
-|  <center>로그인</center> |  <center>로그인 실패</center> |  
-|:--------|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/71947640-e0c39100-3210-11ea-9238-e18f4f95d63c.jpg" width="40%"></img> | <center><img src="https://user-images.githubusercontent.com/37360089/71947650-e325eb00-3210-11ea-9024-3a11d262500e.jpg" width="40%"></img></center> |
 
-|  <center>메인 화면</center> |  <center>메뉴</center> |  
-|:--------|:--------:|
-| <center><img src="https://user-images.githubusercontent.com/37360089/71947644-e15c2780-3210-11ea-8a76-2241b27c6e0d.jpg"></img></center> | <center><img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg"></img>
+| <center>로그인</center> | <center>로그인 실패</center> |  
+|:--------:|:--------:|
+| <img src="https://user-images.githubusercontent.com/37360089/71947640-e0c39100-3210-11ea-9238-e18f4f95d63c.jpg" width="70%"></img> | <center><img src="https://user-images.githubusercontent.com/37360089/71947650-e325eb00-3210-11ea-9024-3a11d262500e.jpg" width="70%"></img></center> |
+
+| <center>메인 화면</center> | <center>메뉴</center> |  
+|:--------:|:--------:|
+| <center><img src="https://user-images.githubusercontent.com/37360089/71947644-e15c2780-3210-11ea-8a76-2241b27c6e0d.jpg" width="70%"></img></center> | <center><img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img>
 </center> |
 
-|  <center>앱정보 (i 아이콘)</center> |
-|:--------|
-| <center><img src="https://user-images.githubusercontent.com/37360089/71947642-e0c39100-3210-11ea-8eb5-69a9e36323ce.jpg"></img></center> |
-
-</div>
+| <center>앱정보 (i 아이콘)</center> |
+|:--------:|
+| <center><img src="https://user-images.githubusercontent.com/37360089/71947642-e0c39100-3210-11ea-8eb5-69a9e36323ce.jpg" width="70%"></img></center> |
 
 ## 출처
 * 파싱: https://partnerjun.tistory.com/43?category=693285/
