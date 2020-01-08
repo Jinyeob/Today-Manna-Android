@@ -108,8 +108,8 @@ String PASSWD="";
                 System.out.println("-------------------------------------------------------------");
 
                 for (Element e : titles) {
-                    System.out.println("title: " + e.text());
-                    htmlContentInStringFormat += e.text().trim() + "\n";
+                    //System.out.println(e.text());
+                    htmlContentInStringFormat = e.text().trim() + "\n";
                 }
 
                 viewPageUrl = contentATags.attr("abs:src");

@@ -1,9 +1,12 @@
 package com.manna.parsing2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +28,11 @@ public class LoginActivity extends AppCompatActivity {
         passwdView = (EditText) findViewById(R.id.editText_passwd);
         loginButton = (Button) findViewById(R.id.button_login);
         autoLogin=(CheckBox)findViewById(R.id.checkBox);
+
+        //툴바
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.myAppName);
+        setSupportActionBar(toolbar);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,5 +65,25 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_login, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.info :
+                Intent intent_ = new Intent(getApplicationContext(), app_info.class);
+                startActivity(intent_);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
