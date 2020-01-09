@@ -4,36 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back_color"
     android:orientation="vertical"
-    tools:context=".app_info"
-    android:background="@color/back_color">
+    tools:context=".app_info">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFFFFFFF"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFFFF" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="150dp"
         android:layout_marginBottom="20dp"
         android:text="'오늘의 만나'"
+        android:textColor="#000000"
         android:textSize="12pt" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="wrap_content"
+        android:layout_width="337dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
-        android:text="아침마다 만나 범위 확인하는 수고를 덜기 위해 제작하였습니다."
-        android:textSize="12pt" />
+        android:text="아침마다 만나 범위를 확인해야 하는 수고를 덜어 주기 위해 제작되었습니다."
+        android:textColor="#000000"
+        android:textSize="9pt" />
 
     <TextView
         android:id="@+id/textView4"
@@ -42,7 +44,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
         android:text="문의: jinyeob07@gmail.com"
-        android:textSize="12pt" />
+        android:textSize="9pt" />
 
     <TextView
         android:id="@+id/textView8"
@@ -51,7 +53,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
         android:text="버전: 1.5"
-        android:textSize="12pt" />
+        android:textSize="9pt" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"

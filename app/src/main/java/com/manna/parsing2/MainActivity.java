@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //일요일일때
-        Date currentTime= Calendar.getInstance().getTime();
+        Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat weekdayFormat = new SimpleDateFormat("EE", Locale.getDefault());
         String weekDay = weekdayFormat.format(currentTime);
-        if(weekDay.equals("일")){
+        if (weekDay.equals("일")) {
             Toast.makeText(MainActivity.this, "일요일은 지원하지 않습니다.", Toast.LENGTH_LONG).show();
             Intent intent__ = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent__);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             //프로세스 다이얼로그
             progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("잠시 기다려 주세요.");
+            progressDialog.setMessage("불러오는 중...");
             progressDialog.show();
         }
 
@@ -150,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
                 Elements contentATags = doc.select("div.conbox.active img");
 
                 //맥체인
-             //   Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
-             //           .get();
-            //    Elements titles2 = doc2.select("[bgcolor=\"#FFFFFF\"] [align=\"center\"] [height=\"20\"]");
+                Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
+                        .get();
+                 Elements titles2 = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20]");
 
                 System.out.println("-------------------------------------------------------------");
 
@@ -167,11 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 //System.out.println(viewPageUrl);
 
                 //맥체인 범위 스트링
-             //   System.out.println(doc2);
+                htmlContentInStringFormat2=titles2.text();
 
-             //     for (Element e2 : titles2) {
-             //       htmlContentInStringFormat2 = e2.text().trim() + "\n";
-             //   }
 
                 if (htmlContentInStringFormat.equals("") || viewPageUrl.equals("")) {
                     Handler mHandler = new Handler(Looper.getMainLooper());
@@ -199,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             textviewHtmlDocument.setText(htmlContentInStringFormat);
             webView.loadUrl(viewPageUrl);
 
-        //    textviewHtmlDocument2.setText(htmlContentInStringFormat2);
+            textviewHtmlDocument2.setText(htmlContentInStringFormat2);
 
             info_text.setText("오늘도 주님과 화이팅!");
             progressDialog.dismiss();
