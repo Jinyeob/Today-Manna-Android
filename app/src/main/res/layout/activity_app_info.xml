@@ -23,7 +23,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
-        android:text="제작자: 김진엽"
+        android:text="'오늘의 만나'"
         android:textSize="12pt" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
-        android:text="소속: 일산교회 청년회"
+        android:text="아침마다 만나 범위 확인하는 수고를 덜기 위해 제작하였습니다."
         android:textSize="12pt" />
 
     <TextView

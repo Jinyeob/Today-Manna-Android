@@ -27,7 +27,7 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please wait up to 3 seconds" />
+            android:text="" />
 
     </LinearLayout>
 
@@ -41,6 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
+            android:textSize="11pt"
+            android:textColor="#610B21"
             android:text="날짜" />
 
         <WebView
@@ -63,5 +65,11 @@
             app:srcCompat="@android:drawable/ic_popup_sync" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_mc"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:text="" />
 
 </LinearLayout>

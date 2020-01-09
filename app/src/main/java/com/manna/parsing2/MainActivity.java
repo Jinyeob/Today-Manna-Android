@@ -3,6 +3,7 @@ package com.manna.parsing2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,18 +31,20 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-import android.graphics.Bitmap;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     private String htmlPageUrl = "https://community.jbch.org/confirm.php";
     private JsoupAsyncTask jsoupAsyncTask;
     private TextView textviewHtmlDocument;
+    private TextView textviewHtmlDocument2;
+
     private String viewPageUrl = "";
-    Bitmap bm;
     private WebView webView;
+
     private String htmlContentInStringFormat = "";
+    private String htmlContentInStringFormat2 = "";
+
     String ID = "";
     String PASSWD = "";
 
@@ -68,12 +71,15 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        //맨위 안내 텍스트뷰
+        //안내 텍스트뷰
         info_text = (TextView) findViewById(R.id.textView5);
 
         //날짜 텍스트뷰
         textviewHtmlDocument = (TextView) findViewById(R.id.textView);
         textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
+
+        //맥체인 텍스트뷰
+        textviewHtmlDocument2 = (TextView) findViewById(R.id.textView_mc);
 
         //만나범위 웹뷰
         webView = (WebView) findViewById(R.id.webView);
@@ -104,15 +110,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
+        //진행바
+        private ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            //프로세스 다이얼로그
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("잠시 기다려 주세요.");
+            progressDialog.show();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             try {
+                //깨사모
                 Connection.Response res = Jsoup.connect(htmlPageUrl)
                         .data("user_id", ID)
                         .data("saveid", "1")
@@ -134,15 +149,30 @@ public class MainActivity extends AppCompatActivity {
                 Elements titles = doc.select("div.conbox.active div.condate.font-daum");
                 Elements contentATags = doc.select("div.conbox.active img");
 
+                //맥체인
+             //   Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
+             //           .get();
+            //    Elements titles2 = doc2.select("[bgcolor=\"#FFFFFF\"] [align=\"center\"] [height=\"20\"]");
+
                 System.out.println("-------------------------------------------------------------");
 
+                //만나 날짜 스트링
                 for (Element e : titles) {
                     //System.out.println(e.text());
                     htmlContentInStringFormat = e.text().trim() + "\n";
                 }
 
+                //만나 범위 웹뷰용 URL
                 viewPageUrl = contentATags.attr("abs:src");
-                System.out.println(viewPageUrl);
+                //System.out.println(viewPageUrl);
+
+                //맥체인 범위 스트링
+             //   System.out.println(doc2);
+
+             //     for (Element e2 : titles2) {
+             //       htmlContentInStringFormat2 = e2.text().trim() + "\n";
+             //   }
+
                 if (htmlContentInStringFormat.equals("") || viewPageUrl.equals("")) {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.postDelayed(new Runnable() {
@@ -168,7 +198,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             textviewHtmlDocument.setText(htmlContentInStringFormat);
             webView.loadUrl(viewPageUrl);
+
+        //    textviewHtmlDocument2.setText(htmlContentInStringFormat2);
+
             info_text.setText("오늘도 주님과 화이팅!");
+            progressDialog.dismiss();
         }
     }
 
