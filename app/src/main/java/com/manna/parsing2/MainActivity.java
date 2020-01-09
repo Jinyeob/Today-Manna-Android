@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     String PASSWD = "";
 
     private TextView info_text;
+    private String thumbURL;
+    private String today_bible="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        //안내 텍스트뷰
+        //말씀용 텍스트뷰
         info_text = (TextView) findViewById(R.id.textView5);
+        info_text.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
 
         //날짜 텍스트뷰
         textviewHtmlDocument = (TextView) findViewById(R.id.textView);
@@ -83,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         //만나범위 웹뷰
         webView = (WebView) findViewById(R.id.webView);
-
-        //새로고침 아이콘
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
 
         //로그인 정보
         Intent loginIntent = getIntent();
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
 
+        /*
+        //새로고침
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
         //새로고침 아이콘 이벤트리스너
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 jsoupAsyncTask.execute();
             }
         });
+         */
     }
 
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -149,6 +153,34 @@ public class MainActivity extends AppCompatActivity {
                 Elements titles = doc.select("div.conbox.active div.condate.font-daum");
                 Elements contentATags = doc.select("div.conbox.active img");
 
+                //실제 말씀 url
+                Element getURL = doc.select("div.conbox.active div.content").first();
+                thumbURL=getURL
+                        .attr("onclick")
+                        .replace("getUrl('", "")
+                        .replace("', '')", "");
+                System.out.println("\n***************************************************\n"+thumbURL);
+                System.out.println("***************************************************");
+
+                String target = "?uid=";
+                int target_num = thumbURL.indexOf(target);
+                String result;
+                result = thumbURL.substring(target_num+5,thumbURL.indexOf("&")+1);
+
+                //실제 말씀 구절 url로 접속
+                Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
+                        .header("Origin","http://community.jbch.org")
+                        .header("Referer","http://community.jbch.org/")
+                        .data("mode","load_post")
+                        .data("post_uid",result)
+                        .cookies(loginCookie)
+                        .post();
+                System.out.println("***************************************************");
+                System.out.println(doc_bible);
+                System.out.println("***************************************************");
+
+                Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
+
                 //맥체인
                 Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
                         .get();
@@ -164,12 +196,17 @@ public class MainActivity extends AppCompatActivity {
 
                 //만나 범위 웹뷰용 URL
                 viewPageUrl = contentATags.attr("abs:src");
-                //System.out.println(viewPageUrl);
+
+                //만나 실제 말씀
+                for (Element e2 : content_bible) {
+                    System.out.println(e2.text());
+                    today_bible += e2.text().trim() + "\n";
+                }
 
                 //맥체인 범위 스트링
                 htmlContentInStringFormat2=titles2.text();
 
-
+                //로그인 실패 조건문
                 if (htmlContentInStringFormat.equals("") || viewPageUrl.equals("")) {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.postDelayed(new Runnable() {
@@ -183,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }, 0);
                 }
+
                 System.out.println("-------------------------------------------------------------");
 
             } catch (IOException e) {
@@ -193,12 +231,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            //만나 날짜
             textviewHtmlDocument.setText(htmlContentInStringFormat);
+            //만나범위
             webView.loadUrl(viewPageUrl);
 
+            //말씀
+            info_text.setText(today_bible);
+
+            //맥체인
             textviewHtmlDocument2.setText(htmlContentInStringFormat2);
 
-            info_text.setText("오늘도 주님과 화이팅!");
             progressDialog.dismiss();
         }
     }
