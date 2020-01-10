@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.myAppName);
         setSupportActionBar(toolbar);
 
+
         if (SaveSharedPreference.getUserName(LoginActivity.this).length() != 0 && SaveSharedPreference.getUserPasswd(LoginActivity.this).length() != 0) {
             idView.setText(SaveSharedPreference.getUserName(this).toString());
             passwdView.setText(SaveSharedPreference.getUserPasswd(this).toString());
@@ -47,6 +48,12 @@ public class LoginActivity extends AppCompatActivity {
                 String id = idView.getText().toString();
                 String passwd = passwdView.getText().toString();
 
+                if (autoLogin.isChecked()) {
+                    SaveSharedPreference.setUser(LoginActivity.this, idView.getText().toString(), passwdView.getText().toString());
+                } else {
+                    SaveSharedPreference.clearUser(LoginActivity.this);
+                }
+
                 if (id.length() > 0 && passwd.length() > 0) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("id", id);
@@ -56,17 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "ID와 PW를 입력해주세요", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    SaveSharedPreference.setUser(LoginActivity.this, idView.getText().toString(), passwdView.getText().toString());
-                } else {
-                    SaveSharedPreference.clearUser(LoginActivity.this);
                 }
             }
         });
