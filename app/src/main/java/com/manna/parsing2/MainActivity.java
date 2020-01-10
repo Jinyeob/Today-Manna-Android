@@ -35,15 +35,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     private String htmlPageUrl = "https://community.jbch.org/confirm.php";
-    private JsoupAsyncTask jsoupAsyncTask;
+    private JsoupAsyncTask1 jsoupAsyncTask1;
+    private JsoupAsyncTask2 jsoupAsyncTask2;
+    private JsoupAsyncTask3 jsoupAsyncTask3;
+
+    private Map<String, String> loginCookie;
+    private Document doc;
+    private Element getURL;
+
+
     private TextView textviewHtmlDocument;
-    private TextView textviewHtmlDocument2;
+
+    private TextView mchain1;
+    private TextView mchain2;
 
     private String viewPageUrl = "";
     private WebView webView;
 
     private String htmlContentInStringFormat = "";
     private String htmlContentInStringFormat2 = "";
+
 
     String ID = "";
     String PASSWD = "";
@@ -82,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
         textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
 
         //맥체인 텍스트뷰
-        textviewHtmlDocument2 = (TextView) findViewById(R.id.textView_mc);
+        mchain1 = (TextView) findViewById(R.id. textView_mc_info);
+        mchain2 = (TextView) findViewById(R.id.textView_mc);
 
         //만나범위 웹뷰
         webView = (WebView) findViewById(R.id.webView);
@@ -91,13 +103,18 @@ public class MainActivity extends AppCompatActivity {
         Intent loginIntent = getIntent();
         ID = loginIntent.getStringExtra("id");
         PASSWD = loginIntent.getStringExtra("passwd");
-        System.out.println("@@@@ ID = " + ID);
-        System.out.println("@@@@ PASSWD = " + PASSWD);
+     //   System.out.println("@@@@ ID = " + ID);
+     //   System.out.println("@@@@ PASSWD = " + PASSWD);
 
         //파싱 시작
-        jsoupAsyncTask = new JsoupAsyncTask();
-        jsoupAsyncTask.execute();
+        jsoupAsyncTask1 = new JsoupAsyncTask1();
+        jsoupAsyncTask1.execute();
 
+        jsoupAsyncTask2 = new JsoupAsyncTask2();
+        jsoupAsyncTask2.execute();
+
+        jsoupAsyncTask3 = new JsoupAsyncTask3();
+        jsoupAsyncTask3.execute();
         /*
         //새로고침
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
@@ -113,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
          */
     }
 
-    private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
+    private class JsoupAsyncTask1 extends AsyncTask<Void, Void, Void> {
         //진행바
         private ProgressDialog progressDialog;
 
@@ -145,66 +162,25 @@ public class MainActivity extends AppCompatActivity {
                         .method(Connection.Method.POST)
                         .execute();
 
-                Map<String, String> loginCookie = res.cookies();
-                Document doc = Jsoup.connect("https://community.jbch.org/")
+                loginCookie = res.cookies();
+                doc = Jsoup.connect("https://community.jbch.org/")
                         .cookies(loginCookie)
                         .get();
 
                 Elements titles = doc.select("div.conbox.active div.condate.font-daum");
                 Elements contentATags = doc.select("div.conbox.active img");
 
-                //실제 말씀 url
-                Element getURL = doc.select("div.conbox.active div.content").first();
-                thumbURL=getURL
-                        .attr("onclick")
-                        .replace("getUrl('", "")
-                        .replace("', '')", "");
-                System.out.println("\n***************************************************\n"+thumbURL);
-                System.out.println("***************************************************");
-
-                String target = "?uid=";
-                int target_num = thumbURL.indexOf(target);
-                String result;
-                result = thumbURL.substring(target_num+5,thumbURL.indexOf("&")+1);
-
-                //실제 말씀 구절 url로 접속
-                Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
-                        .header("Origin","http://community.jbch.org")
-                        .header("Referer","http://community.jbch.org/")
-                        .data("mode","load_post")
-                        .data("post_uid",result)
-                        .cookies(loginCookie)
-                        .post();
-                System.out.println("***************************************************");
-                System.out.println(doc_bible);
-                System.out.println("***************************************************");
-
-                Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
-
-                //맥체인
-                Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
-                        .get();
-                 Elements titles2 = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20]");
-
-                System.out.println("-------------------------------------------------------------");
+                System.out.println("-----------------------------------------------------------------------------------------------------------");
 
                 //만나 날짜 스트링
                 for (Element e : titles) {
-                    //System.out.println(e.text());
+                    System.out.println(e.text());
                     htmlContentInStringFormat = e.text().trim() + "\n";
                 }
 
                 //만나 범위 웹뷰용 URL
                 viewPageUrl = contentATags.attr("abs:src");
-
-                //만나 실제 말씀
-                for (Element e2 : content_bible) {
-                    System.out.println(e2.text());
-                    today_bible += e2.text().trim() + "\n";
-                }
-
-                //맥체인 범위 스트링
-                htmlContentInStringFormat2=titles2.text();
+                System.out.println("범위 URL: "+viewPageUrl);
 
                 //로그인 실패 조건문
                 if (htmlContentInStringFormat.equals("") || viewPageUrl.equals("")) {
@@ -221,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                     }, 0);
                 }
 
-                System.out.println("-------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -236,11 +212,118 @@ public class MainActivity extends AppCompatActivity {
             //만나범위
             webView.loadUrl(viewPageUrl);
 
+            progressDialog.dismiss();
+        }
+    }
+
+    private class JsoupAsyncTask2 extends AsyncTask<Void, Void, Void> {
+        //진행바
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //프로세스 다이얼로그
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("불러오는 중...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                //실제 말씀 url
+                getURL = doc.select("div.conbox.active div.content").first();
+                thumbURL=getURL
+                        .attr("onclick")
+                        .replace("getUrl('", "")
+                        .replace("', '')", "");
+                System.out.println("***************************************************");
+                System.out.println(thumbURL);
+                System.out.println("***************************************************");
+
+                String target = "?uid=";
+                int target_num = thumbURL.indexOf(target);
+                String result;
+                result = thumbURL.substring(target_num+5,thumbURL.indexOf("&")+1);
+
+                //실제 말씀 구절 url로 접속
+                Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
+                        .header("Origin","http://community.jbch.org")
+                        .header("Referer","http://community.jbch.org/")
+                        .data("mode","load_post")
+                        .data("post_uid",result)
+                        .cookies(loginCookie)
+                        .post();
+
+                Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
+
+                System.out.println("-----------------------------------------------------------------------------------------------------------");
+
+                //만나 실제 말씀
+                for (Element e2 : content_bible) {
+                    System.out.println(e2.text());
+                    today_bible += e2.text().trim() + "\n";
+                }
+                System.out.println("-------------------------------------------------------------------------------------------------------");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
             //말씀
             info_text.setText(today_bible);
 
+            progressDialog.dismiss();
+        }
+    }
+    private class JsoupAsyncTask3 extends AsyncTask<Void, Void, Void> {
+        //진행바
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //프로세스 다이얼로그
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("불러오는 중...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                //맥체인
+                Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
+                        .get();
+                Elements titles2 = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20]");
+
+                System.out.println("-----------------------------------------------------------------------------------------------------------");
+                //맥체인 범위 스트링
+                htmlContentInStringFormat2=titles2.text();
+                System.out.println("맥체인범위: "+htmlContentInStringFormat2);
+
+                System.out.println("-------------------------------------------------------------------------------------------------------");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
             //맥체인
-            textviewHtmlDocument2.setText(htmlContentInStringFormat2);
+            mchain1.setText("오늘의 맥체인");
+            mchain2.setText(htmlContentInStringFormat2);
 
             progressDialog.dismiss();
         }
@@ -268,8 +351,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.refresh:
                 Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
-                JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
-                jsoupAsyncTask.execute();
+                //파싱 시작
+                jsoupAsyncTask1 = new JsoupAsyncTask1();
+                jsoupAsyncTask1.execute();
+
+                jsoupAsyncTask2 = new JsoupAsyncTask2();
+                jsoupAsyncTask2.execute();
+
+                jsoupAsyncTask3 = new JsoupAsyncTask3();
+                jsoupAsyncTask3.execute();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
