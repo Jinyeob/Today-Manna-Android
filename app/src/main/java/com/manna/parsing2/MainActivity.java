@@ -36,13 +36,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
     private String htmlPageUrl = "https://community.jbch.org/confirm.php";
     private JsoupAsyncTask1 jsoupAsyncTask1;
+    private JsoupAsyncTask1_webview JsoupAsyncTask1_webview;
     private JsoupAsyncTask2 jsoupAsyncTask2;
     private JsoupAsyncTask3 jsoupAsyncTask3;
 
     private Map<String, String> loginCookie;
     private Document doc;
     private Element getURL;
-
 
     private TextView textviewHtmlDocument;
 
@@ -61,12 +61,17 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView info_text;
     private String thumbURL;
-    private String today_bible="";
+    private String today_bible = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //로그인 정보
+        Intent loginIntent = getIntent();
+        ID = loginIntent.getStringExtra("id");
+        PASSWD = loginIntent.getStringExtra("passwd");
 
         //툴바
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -93,41 +98,24 @@ public class MainActivity extends AppCompatActivity {
         textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
 
         //맥체인 텍스트뷰
-        mchain1 = (TextView) findViewById(R.id. textView_mc_info);
+        mchain1 = (TextView) findViewById(R.id.textView_mc_info);
         mchain2 = (TextView) findViewById(R.id.textView_mc);
 
         //만나범위 웹뷰
         webView = (WebView) findViewById(R.id.webView);
 
-        //로그인 정보
-        Intent loginIntent = getIntent();
-        ID = loginIntent.getStringExtra("id");
-        PASSWD = loginIntent.getStringExtra("passwd");
-     //   System.out.println("@@@@ ID = " + ID);
-     //   System.out.println("@@@@ PASSWD = " + PASSWD);
-
         //파싱 시작
         jsoupAsyncTask1 = new JsoupAsyncTask1();
         jsoupAsyncTask1.execute();
+
+        JsoupAsyncTask1_webview = new JsoupAsyncTask1_webview();
+        JsoupAsyncTask1_webview.execute();
 
         jsoupAsyncTask2 = new JsoupAsyncTask2();
         jsoupAsyncTask2.execute();
 
         jsoupAsyncTask3 = new JsoupAsyncTask3();
         jsoupAsyncTask3.execute();
-        /*
-        //새로고침
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
-        //새로고침 아이콘 이벤트리스너
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
-                JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
-                jsoupAsyncTask.execute();
-            }
-        });
-         */
     }
 
     private class JsoupAsyncTask1 extends AsyncTask<Void, Void, Void> {
@@ -168,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                         .get();
 
                 Elements titles = doc.select("div.conbox.active div.condate.font-daum");
-                Elements contentATags = doc.select("div.conbox.active img");
 
                 System.out.println("-----------------------------------------------------------------------------------------------------------");
 
@@ -178,12 +165,8 @@ public class MainActivity extends AppCompatActivity {
                     htmlContentInStringFormat = e.text().trim() + "\n";
                 }
 
-                //만나 범위 웹뷰용 URL
-                viewPageUrl = contentATags.attr("abs:src");
-                System.out.println("범위 URL: "+viewPageUrl);
-
                 //로그인 실패 조건문
-                if (htmlContentInStringFormat.equals("") || viewPageUrl.equals("")) {
+                if (htmlContentInStringFormat.equals("")) {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.postDelayed(new Runnable() {
                         @Override
@@ -209,10 +192,45 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             //만나 날짜
             textviewHtmlDocument.setText(htmlContentInStringFormat);
-            //만나범위
-            webView.loadUrl(viewPageUrl);
 
             progressDialog.dismiss();
+        }
+    }
+
+    private class JsoupAsyncTask1_webview extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Elements contentATags = doc.select("div.conbox.active img");
+
+            //만나 범위 웹뷰용 URL
+            viewPageUrl = contentATags.attr("abs:src");
+
+            //로그인 실패 조건문
+            if (viewPageUrl.equals("")) {
+                Handler mHandler = new Handler(Looper.getMainLooper());
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "로그인 실패, 다시 로그인 해주세요.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        SaveSharedPreference.clearUser(MainActivity.this);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 0);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            //만나범위
+            webView.loadUrl(viewPageUrl);
         }
     }
 
@@ -236,25 +254,22 @@ public class MainActivity extends AppCompatActivity {
             try {
                 //실제 말씀 url
                 getURL = doc.select("div.conbox.active div.content").first();
-                thumbURL=getURL
+                thumbURL = getURL
                         .attr("onclick")
                         .replace("getUrl('", "")
                         .replace("', '')", "");
-                System.out.println("***************************************************");
-                System.out.println(thumbURL);
-                System.out.println("***************************************************");
 
                 String target = "?uid=";
                 int target_num = thumbURL.indexOf(target);
                 String result;
-                result = thumbURL.substring(target_num+5,thumbURL.indexOf("&")+1);
+                result = thumbURL.substring(target_num + 5, thumbURL.indexOf("&") + 1);
 
                 //실제 말씀 구절 url로 접속
                 Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
-                        .header("Origin","http://community.jbch.org")
-                        .header("Referer","http://community.jbch.org/")
-                        .data("mode","load_post")
-                        .data("post_uid",result)
+                        .header("Origin", "http://community.jbch.org")
+                        .header("Referer", "http://community.jbch.org/")
+                        .data("mode", "load_post")
+                        .data("post_uid", result)
                         .cookies(loginCookie)
                         .post();
 
@@ -264,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //만나 실제 말씀
                 for (Element e2 : content_bible) {
-                    System.out.println(e2.text());
                     today_bible += e2.text().trim() + "\n";
                 }
                 System.out.println("-------------------------------------------------------------------------------------------------------");
@@ -283,6 +297,7 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
     }
+
     private class JsoupAsyncTask3 extends AsyncTask<Void, Void, Void> {
         //진행바
         private ProgressDialog progressDialog;
@@ -308,8 +323,8 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println("-----------------------------------------------------------------------------------------------------------");
                 //맥체인 범위 스트링
-                htmlContentInStringFormat2=titles2.text();
-                System.out.println("맥체인범위: "+htmlContentInStringFormat2);
+                htmlContentInStringFormat2 = titles2.text();
+                System.out.println("맥체인범위: " + htmlContentInStringFormat2);
 
                 System.out.println("-------------------------------------------------------------------------------------------------------");
 
@@ -355,12 +370,14 @@ public class MainActivity extends AppCompatActivity {
                 jsoupAsyncTask1 = new JsoupAsyncTask1();
                 jsoupAsyncTask1.execute();
 
+                JsoupAsyncTask1_webview = new JsoupAsyncTask1_webview();
+                JsoupAsyncTask1_webview.execute();
+
                 jsoupAsyncTask2 = new JsoupAsyncTask2();
                 jsoupAsyncTask2.execute();
 
                 jsoupAsyncTask3 = new JsoupAsyncTask3();
                 jsoupAsyncTask3.execute();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
