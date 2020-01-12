@@ -98,7 +98,8 @@ public class SaveSharedPreference {
 
 | <center>메인 화면</center> | <center>메뉴</center> |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/71947644-e15c2780-3210-11ea-8a76-2241b27c6e0d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/72217496-ef43dc80-3571-11ea-8ca2-225d83133e68.jpg" width="70%"></img>
+ | <img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img> |
 
 | 앱 정보 (i 아이콘) | 새로고침 |
 |:--------:|:--------:|
