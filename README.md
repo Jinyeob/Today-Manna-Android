@@ -107,11 +107,15 @@ if (doc == null) {
 
 ```
 #### 세부 페이지 파싱 (header 값으로)
+<p>
+network 탭의 XHR 필터를 사용해서 묵상 구절을 올리는 페이지로 들어가보았다. 그리고 process.php 파일 프리뷰를 보아하니 아 이걸로 파싱하면 되겠다 싶었음. <br>
 <img src="https://user-images.githubusercontent.com/37360089/72217613-cfadb380-3573-11ea-9e8b-e52b7b55a27d.png" width="40%"></img>
-- network 탭의 XHR 필터를 사용해서 묵상 구절을 올리는 페이지로 들어가보았다. 그리고 process.php 파일 프리뷰를 보아하니 아 이걸로 파싱하면 되겠다 싶었음
-
+</p>
+<p>
+다른 같은 이름의 process.php 와 header값 차이점은 mode가 다르다는 것임!! load_post로 헤더값을 추가. post_uid는 파싱한 해당 url에서 substring으로 잘라서 가져왔음.<br>
 <img src="https://user-images.githubusercontent.com/37360089/72217615-d0dee080-3573-11ea-8631-3a34b255dac1.png" width="40%"></img>
-- 다른 같은 이름의 process.php 와 header값 차이점은 mode가 다르다는 것임!! load_post로 헤더값을 추가. post_uid는 파싱한 해당 url에서 substring으로 잘라서 가져왔음.
+</p>
+<br>
 
 * div에서 가져온 더러운(?) url에서, onclick 속성의 값을 attr로 추출 후 replace를 사용하여 온전한 url 값으로 저장
 ```java
@@ -122,7 +126,7 @@ thumbURL = getURL
           .replace("getUrl('", "")
           .replace("', '')", "");
 ```
-
+<br>
 * post_uid 추출 (http://x/x/x/x.php?uid=3899409&x&x&x&x&x&x)
 ```java
 String target = "?uid=";
@@ -130,7 +134,7 @@ int target_num = thumbURL.indexOf(target);
 String result;
 result = thumbURL.substring(target_num + 5, thumbURL.indexOf("&") + 1);
 ```
-
+<br>
 * 접속 (여기서는 get이 아니라 post로 가져온다. post 값을 추가하니깐..)
 ```java
 //실제 말씀 구절 url로 접속
@@ -142,7 +146,7 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
                     .cookies(loginCookie)
                     .post();
 ```
-
+<br>
 ## 스크린샷
 
 | <center>로그인</center> | <center>로그인 실패</center> |
