@@ -1,5 +1,5 @@
 # Today_manna
-오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다. <
+오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다. <br>
 플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
 
 ## 기능 (업데이트 중 - 1/12)
@@ -108,10 +108,10 @@ if (doc == null) {
 ```
 #### 세부 페이지 파싱 (header 값으로)
 <img src="https://user-images.githubusercontent.com/37360089/72217613-cfadb380-3573-11ea-9e8b-e52b7b55a27d.png" width="40%"></img>
-network 탭의 XHR 필터를 사용해서 묵상 구절을 올리는 페이지로 들어가보았다. 그리고 process.php 파일 프리뷰를 보아하니 아 이걸로 파싱하면 되겠다 싶었음
+- network 탭의 XHR 필터를 사용해서 묵상 구절을 올리는 페이지로 들어가보았다. 그리고 process.php 파일 프리뷰를 보아하니 아 이걸로 파싱하면 되겠다 싶었음
 
 <img src="https://user-images.githubusercontent.com/37360089/72217615-d0dee080-3573-11ea-8631-3a34b255dac1.png" width="40%"></img>
-다른 같은 이름의 process.php 와 header값 차이점은 mode가 다르다는 것임!! load_post로 헤더값을 추가. post_uid는 파싱한 해당 url에서 substring으로 잘라서 가져왔음.
+- 다른 같은 이름의 process.php 와 header값 차이점은 mode가 다르다는 것임!! load_post로 헤더값을 추가. post_uid는 파싱한 해당 url에서 substring으로 잘라서 가져왔음.
 
 * div에서 가져온 더러운(?) url에서, onclick 속성의 값을 attr로 추출 후 replace를 사용하여 온전한 url 값으로 저장
 ```java
