@@ -1,7 +1,22 @@
 # Today_manna
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.
+플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
 
-## 기능 (업데이트 중 - 1/8)
+## 기능 (업데이트 중 - 1/12)
+3.1.3
+* 몇몇 구형폰에서 생기는 치명적 오류 해결
+* 로그인 실패 시 앱이 비정상 종료되는 오류 해결
+* 화면회전 시 새로고침되는 현상 해결
+* 화면 스크롤 가능하게 변경
+
+3.0.0
+* 만나 범위 뿐만 아니라, 해당 구절도 제공
+* 오늘의 맥체인 읽기 범위 제공 (http://www.bible4u.pe.kr/zbxe/read 에서 파싱)
+* 기존 텍스트로 알려주던 내용을 프로세스 다이얼로그로 대체
+* 정보 창 내용 수정
+* 새로고침 플로팅아이콘 삭제
+
+1.0 ~ 3.0.0
 * 로그인
 * 로그인 자동저장
 * 파싱 후 날짜, 만나 범위 출력
@@ -10,6 +25,8 @@
 * 버튼 기능 -> 툴바 메뉴로 옮김
 * 디자인개선
 * 새로고침 시, 날짜가 중복돼서 출력되는 현상 해결
+
+
 
 ## 기능 설명
 
@@ -98,8 +115,7 @@ public class SaveSharedPreference {
 
 | <center>메인 화면</center> | <center>메뉴</center> |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72217496-ef43dc80-3571-11ea-8ca2-225d83133e68.jpg" width="70%"></img>
- | <img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/72217496-ef43dc80-3571-11ea-8ca2-225d83133e68.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img> |
 
 | 앱 정보 (i 아이콘) | 새로고침 |
 |:--------:|:--------:|
