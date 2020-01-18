@@ -12,9 +12,6 @@ import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,37 +28,28 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 public class MainActivity extends AppCompatActivity {
-    private String htmlPageUrl = "https://community.jbch.org/confirm.php";
     private JsoupAsyncTask1 jsoupAsyncTask1;
-    private JsoupAsyncTask1_webview JsoupAsyncTask1_webview;
-    private JsoupAsyncTask2 jsoupAsyncTask2;
-    private JsoupAsyncTask3 jsoupAsyncTask3;
+    private JsoupAsyncTask_mcchain JsoupAsyncTask_mcchain;
 
     private Map<String, String> loginCookie;
     private Document doc;
     private Element getURL;
 
-    private TextView textviewHtmlDocument;
+    private TextView dateView;
+    private TextView mcchainView_title;
+    private TextView mcchainView_content;
+    private TextView MannaTitleView;
+    private TextView MannaContentView;
 
-    private TextView mchain1;
-    private TextView mchain2;
+    private String ID = "";
+    private String PASSWD = "";
 
-    private String viewPageUrl = "";
-    private WebView webView;
-
-    private String htmlContentInStringFormat = "";
-    private String htmlContentInStringFormat2 = "";
-
-
-    String ID = "";
-    String PASSWD = "";
-
-    private TextView info_text;
-    private String thumbURL;
-    private String today_bible = "";
+    private String thumUrlString = "";
+    private String DateString = "";
+    private String mcchainString = "";
+    private String MannaTitleString = "";
+    private String MannaContentString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,46 +77,50 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        //만나범위 텍스트뷰
+        MannaTitleView = (TextView) findViewById(R.id.today_where);
+
         //말씀용 텍스트뷰
-        info_text = (TextView) findViewById(R.id.textView5);
-        info_text.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
+        MannaContentView = (TextView) findViewById(R.id.textView5);
+        //  MannaContentView.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능
 
         //날짜 텍스트뷰
-        textviewHtmlDocument = (TextView) findViewById(R.id.textView);
-        textviewHtmlDocument.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능한 텍스트뷰로 만들기
+        dateView = (TextView) findViewById(R.id.textView);
+        //   dateView.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능
 
         //맥체인 텍스트뷰
-        mchain1 = (TextView) findViewById(R.id.textView_mc_info);
-        mchain2 = (TextView) findViewById(R.id.textView_mc);
-
-        //만나범위 웹뷰
-        webView = (WebView) findViewById(R.id.webView);
+        mcchainView_title = (TextView) findViewById(R.id.textView_mc_info);
+        mcchainView_content = (TextView) findViewById(R.id.textView_mc);
 
         //파싱 시작
         jsoupAsyncTask1 = new JsoupAsyncTask1();
         jsoupAsyncTask1.execute();
 
-        JsoupAsyncTask1_webview = new JsoupAsyncTask1_webview();
-        JsoupAsyncTask1_webview.execute();
-
-        jsoupAsyncTask2 = new JsoupAsyncTask2();
-        jsoupAsyncTask2.execute();
-
-        jsoupAsyncTask3 = new JsoupAsyncTask3();
-        jsoupAsyncTask3.execute();
+        JsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
+        JsoupAsyncTask_mcchain.execute();
     }
 
     private class JsoupAsyncTask1 extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog progressDialog;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //프로세스 다이얼로그
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("불러오는 중...");
+            progressDialog.show();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             try {
                 //깨사모
-                Connection.Response res = Jsoup.connect(htmlPageUrl)
+                Connection.Response res = Jsoup.connect("https://community.jbch.org/confirm.php")
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36")
+                        .header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+                        .header("Upgrade-Insecure-Requests","1")
                         .data("user_id", ID)
                         .data("saveid", "1")
                         .data("passwd", PASSWD)
@@ -138,26 +130,72 @@ public class MainActivity extends AppCompatActivity {
                         .data("LoginButton", "LoginButton")
                         .timeout(5000)
                         .maxBodySize(0)
-                        .method(Connection.Method.POST)
+                        .method(Connection.Method.GET)
                         .execute();
 
                 loginCookie = res.cookies();
                 doc = Jsoup.connect("https://community.jbch.org/")
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36")
+                        .header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+                        .header("Upgrade-Insecure-Requests","1")
                         .cookies(loginCookie)
                         .get();
 
-                Elements titles = doc.select("div.conbox.active div.condate.font-daum");
+                Element today_date = doc.select("div.conbox.active div.condate.font-daum").first();
+
+                getURL = doc.select("div.conbox.active div.content").first();
+                thumUrlString = getURL
+                        .attr("onclick")
+                        .replace("getUrl('", "")
+                        .replace("', '')", "");
+
+                String target = "?uid=";
+                int target_num = thumUrlString.indexOf(target);
+                String result;
+                result = thumUrlString.substring(target_num + 5, thumUrlString.indexOf("&") + 1);
+
+                //실제 말씀 구절 url로 접속
+                Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
+                        .header("Origin", "http://community.jbch.org")
+                        .header("Referer", "http://community.jbch.org/")
+                        .data("mode", "load_post")
+                        .data("post_uid", result)
+                        .cookies(loginCookie)
+                        .post();
+
+                Element title_bible = doc_bible.select("div.titlebox div.title").first();
+                Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
 
                 System.out.println("-----------------------------------------------------------------------------------------------------------");
 
                 //만나 날짜 스트링
-                for (Element e : titles) {
-                    System.out.println(e.text());
-                    htmlContentInStringFormat = e.text().trim() + "\n";
+                DateString = today_date.text();
+                System.out.println("날짜: " + DateString);
+
+                //만나 범위
+                MannaTitleString = title_bible.text();
+                System.out.println("범위: " + MannaTitleString);
+
+                //만나 실제 말씀
+                for (Element e2 : content_bible) {
+                    MannaContentString += e2.text().trim() + "\n\n";
                 }
-                System.out.println("날짜: " + htmlContentInStringFormat);
 
                 System.out.println("-------------------------------------------------------------------------------------------------------");
+                //로그인 실패 조건문
+                if (DateString.equals("") || MannaTitleString.equals("")) {
+                    Handler mHandler = new Handler(Looper.getMainLooper());
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "로그인 실패, 다시 로그인 해주세요.", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            SaveSharedPreference.clearUser(MainActivity.this);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 0);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -167,118 +205,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             //만나 날짜
-            textviewHtmlDocument.setText(htmlContentInStringFormat);
-        }
-    }
-
-    private class JsoupAsyncTask1_webview extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            Elements contentATags = doc.select("div.conbox.active img");
-
-            //만나 범위 웹뷰용 URL
-            viewPageUrl = contentATags.attr("abs:src");
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            //만나범위
-            webView.loadUrl(viewPageUrl);
-        }
-    }
-
-    private class JsoupAsyncTask2 extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                //실제 말씀 url
-                if (doc == null) {
-                    Handler mHandler = new Handler(Looper.getMainLooper());
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(MainActivity.this, "로그인 실패, 다시 로그인 해주세요.", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            SaveSharedPreference.clearUser(MainActivity.this);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }, 0);
-                } else {
-                    getURL = doc.select("div.conbox.active div.content").first();
-                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                    System.out.println("getURL: " + getURL);
-                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                }
-                //로그인 실패 조건문
-                if (getURL == null) {
-                    Handler mHandler = new Handler(Looper.getMainLooper());
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(MainActivity.this, "로그인 실패, 다시 로그인 해주세요.", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            SaveSharedPreference.clearUser(MainActivity.this);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }, 0);
-                } else {
-                    thumbURL = getURL
-                            .attr("onclick")
-                            .replace("getUrl('", "")
-                            .replace("', '')", "");
-
-                    String target = "?uid=";
-                    int target_num = thumbURL.indexOf(target);
-                    String result;
-                    result = thumbURL.substring(target_num + 5, thumbURL.indexOf("&") + 1);
-
-                    //실제 말씀 구절 url로 접속
-                    Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
-                            .header("Origin", "http://community.jbch.org")
-                            .header("Referer", "http://community.jbch.org/")
-                            .data("mode", "load_post")
-                            .data("post_uid", result)
-                            .cookies(loginCookie)
-                            .post();
-
-                    Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
-
-                    System.out.println("-----------------------------------------------------------------------------------------------------------");
-
-                    //만나 실제 말씀
-                    for (Element e2 : content_bible) {
-                        today_bible += e2.text().trim() + "\n";
-                    }
-                    System.out.println("-------------------------------------------------------------------------------------------------------");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
+            dateView.setText(DateString);
+            //말씀범위
+            MannaTitleView.setText(MannaTitleString);
             //말씀
-            info_text.setText(today_bible);
+            MannaContentView.setText(MannaContentString);
+            progressDialog.dismiss();
         }
     }
 
-    private class JsoupAsyncTask3 extends AsyncTask<Void, Void, Void> {
+    private class JsoupAsyncTask_mcchain extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -294,8 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println("-----------------------------------------------------------------------------------------------------------");
                 //맥체인 범위 스트링
-                htmlContentInStringFormat2 = titles2.text();
-                System.out.println("맥체인범위: " + htmlContentInStringFormat2);
+                mcchainString = titles2.text();
+                System.out.println("맥체인범위: " + mcchainString);
 
                 System.out.println("-------------------------------------------------------------------------------------------------------");
 
@@ -308,15 +244,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             //맥체인
-            mchain1.setText("오늘의 맥체인");
-            mchain2.setText(htmlContentInStringFormat2);
+            mcchainView_title.setText("오늘의 맥체인");
+            mcchainView_content.setText(mcchainString);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-
         return true;
     }
 
@@ -335,19 +270,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.refresh:
                 //Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
-                today_bible = "";
+                MannaContentString = "";
                 //파싱 시작
                 jsoupAsyncTask1 = new JsoupAsyncTask1();
                 jsoupAsyncTask1.execute();
 
-                JsoupAsyncTask1_webview = new JsoupAsyncTask1_webview();
-                JsoupAsyncTask1_webview.execute();
-
-                jsoupAsyncTask2 = new JsoupAsyncTask2();
-                jsoupAsyncTask2.execute();
-
-                jsoupAsyncTask3 = new JsoupAsyncTask3();
-                jsoupAsyncTask3.execute();
+                JsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
+                JsoupAsyncTask_mcchain.execute();
             default:
                 return super.onOptionsItemSelected(item);
         }
