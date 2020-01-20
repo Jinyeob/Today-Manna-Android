@@ -163,11 +163,11 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 
 | 앱 정보 (i 아이콘) | 새로고침 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72715545-00b16800-3bb4-11ea-91be-9819714a3b5f.jpg width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/72715554-0313c200-3bb4-11ea-8ea8-4181c7811ba5.jpg width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/72715545-00b16800-3bb4-11ea-91be-9819714a3b5f.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/72715554-0313c200-3bb4-11ea-8ea8-4181c7811ba5.jpg" width="70%"></img> |
 
 | 맥체인 |
 |:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72715547-0149fe80-3bb4-11ea-8259-6ebc7d26297f.jpg width="35%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/72715547-0149fe80-3bb4-11ea-8259-6ebc7d26297f.jpg" width="35%"></img> |
 
 ## 출처
 * 파싱: https://partnerjun.tistory.com/43?category=693285/ , https://partnerjun.tistory.com/42
