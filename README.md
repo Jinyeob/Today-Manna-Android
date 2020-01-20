@@ -159,11 +159,15 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 
 | <center>메인 화면</center> | <center>메뉴</center> |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72217496-ef43dc80-3571-11ea-8ca2-225d83133e68.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71947649-e325eb00-3210-11ea-9b85-7b04f9ed39b8.jpg" width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/72715553-0313c200-3bb4-11ea-97cf-b18d1bd42cf7.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/72715550-027b2b80-3bb4-11ea-9bfc-635193173910.jpg" width="70%"></img> |
 
 | 앱 정보 (i 아이콘) | 새로고침 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/71947642-e0c39100-3210-11ea-8eb5-69a9e36323ce.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71948382-300ac100-3213-11ea-866f-2dcce579d2e9.jpg" width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/72715545-00b16800-3bb4-11ea-91be-9819714a3b5f.jpg width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/72715554-0313c200-3bb4-11ea-8ea8-4181c7811ba5.jpg width="70%"></img> |
+
+| 맥체인 |
+|:--------:|
+| <img src="https://user-images.githubusercontent.com/37360089/72715547-0149fe80-3bb4-11ea-8259-6ebc7d26297f.jpg width="35%"></img> |
 
 ## 출처
 * 파싱: https://partnerjun.tistory.com/43?category=693285/ , https://partnerjun.tistory.com/42
