@@ -2,7 +2,7 @@
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다. <br>
 플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
 
-## 기능 (업데이트 중 - 1/12)
+## 기능 (업데이트 중 - 1/20)
 3.2.0
 * 속도향상을 위한 코드 리팩토링
 * 텍스트 왼쪽 정렬
