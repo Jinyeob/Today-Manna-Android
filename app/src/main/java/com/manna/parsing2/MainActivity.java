@@ -126,8 +126,7 @@ public class MainActivity extends AppCompatActivity {
                             finish();
                         }
                     }, 0);
-                }
-                else {
+                } else {
                     //만나 날짜 스트링
                     allString = today_date.text() + "\n\n\n";
 
@@ -175,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -194,11 +192,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_mc);
                 return true;
             case R.id.refresh:
-                //Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
-                allString = "";
+                Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
                 //파싱 시작
                 jsoupAsyncTask1 = new JsoupAsyncTask1();
                 jsoupAsyncTask1.execute();
+                return true;
             case R.id.re_login:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 SaveSharedPreference.clearUser(MainActivity.this);
