@@ -10,12 +10,18 @@
         app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/re_login"
-        android:title="다시 로그인"
+    <item android:id="@+id/mc_cheyne"
+        android:title="오늘의 맥체인"
         app:showAsAction="never"/>
 
     <item android:id="@+id/refresh"
         android:title="새로고침"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/re_login"
+        android:title="다시 로그인"
+        app:showAsAction="never"/>
+
+
 
 </menu>

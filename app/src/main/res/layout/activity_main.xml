@@ -23,68 +23,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- 오늘 날짜-->
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="30dp"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="22sp" />
-
-            <!-- 만나 범위-->
-            <TextView
-                android:id="@+id/today_where"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="left"
-                android:textColor="#000000"
-                android:textIsSelectable="true"
-                android:textSize="22sp"
-                android:text="" />
-
-            <!-- 오늘 말씀-->
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_margin="30dp"
                 android:gravity="left"
                 android:text=""
                 android:textColor="#000000"
                 android:textIsSelectable="true"
-                android:textSize="15sp" />
-
-            <!-- '오늘의 맥체인'-->
-            <TextView
-                android:id="@+id/textView_mc_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000000"
-                android:layout_marginLeft="30dp"
-                android:textSize="22sp" />
-
-            <!-- 오늘의 맥체인 범위-->
-            <TextView
-                android:id="@+id/textView_mc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginLeft="30dp"
-                android:gravity="center"
-                android:text=""
-                android:textIsSelectable="true"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

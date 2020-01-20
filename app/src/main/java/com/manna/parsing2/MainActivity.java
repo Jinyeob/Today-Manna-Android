@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -29,27 +28,20 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    private String htmlPageUrl = "https://community.jbch.org/confirm.php";
     private JsoupAsyncTask1 jsoupAsyncTask1;
-    private JsoupAsyncTask_mcchain JsoupAsyncTask_mcchain;
 
     private Map<String, String> loginCookie;
     private Document doc;
     private Element getURL;
 
-    private TextView dateView;
-    private TextView mcchainView_title;
-    private TextView mcchainView_content;
-    private TextView MannaTitleView;
-    private TextView MannaContentView;
+    private TextView MannaView;
 
     private String ID = "";
     private String PASSWD = "";
 
     private String thumUrlString = "";
-    private String DateString = "";
-    private String mcchainString = "";
-    private String MannaTitleString = "";
-    private String MannaContentString = "";
+    private String allString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,27 +69,11 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        //만나범위 텍스트뷰
-        MannaTitleView = (TextView) findViewById(R.id.today_where);
-
-        //말씀용 텍스트뷰
-        MannaContentView = (TextView) findViewById(R.id.textView5);
-        //  MannaContentView.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능
-
-        //날짜 텍스트뷰
-        dateView = (TextView) findViewById(R.id.textView);
-        //   dateView.setMovementMethod(new ScrollingMovementMethod()); //스크롤 가능
-
-        //맥체인 텍스트뷰
-        mcchainView_title = (TextView) findViewById(R.id.textView_mc_info);
-        mcchainView_content = (TextView) findViewById(R.id.textView_mc);
+        MannaView = (TextView) findViewById(R.id.textView);
 
         //파싱 시작
         jsoupAsyncTask1 = new JsoupAsyncTask1();
         jsoupAsyncTask1.execute();
-
-        JsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
-        JsoupAsyncTask_mcchain.execute();
     }
 
     private class JsoupAsyncTask1 extends AsyncTask<Void, Void, Void> {
@@ -117,10 +93,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             try {
                 //깨사모
-                Connection.Response res = Jsoup.connect("https://community.jbch.org/confirm.php")
-                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36")
-                        .header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
-                        .header("Upgrade-Insecure-Requests","1")
+                Connection.Response res = Jsoup.connect(htmlPageUrl)
                         .data("user_id", ID)
                         .data("saveid", "1")
                         .data("passwd", PASSWD)
@@ -130,60 +103,18 @@ public class MainActivity extends AppCompatActivity {
                         .data("LoginButton", "LoginButton")
                         .timeout(5000)
                         .maxBodySize(0)
-                        .method(Connection.Method.GET)
+                        .method(Connection.Method.POST)
                         .execute();
 
                 loginCookie = res.cookies();
                 doc = Jsoup.connect("https://community.jbch.org/")
-                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36")
-                        .header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
-                        .header("Upgrade-Insecure-Requests","1")
                         .cookies(loginCookie)
                         .get();
 
                 Element today_date = doc.select("div.conbox.active div.condate.font-daum").first();
 
-                getURL = doc.select("div.conbox.active div.content").first();
-                thumUrlString = getURL
-                        .attr("onclick")
-                        .replace("getUrl('", "")
-                        .replace("', '')", "");
-
-                String target = "?uid=";
-                int target_num = thumUrlString.indexOf(target);
-                String result;
-                result = thumUrlString.substring(target_num + 5, thumUrlString.indexOf("&") + 1);
-
-                //실제 말씀 구절 url로 접속
-                Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
-                        .header("Origin", "http://community.jbch.org")
-                        .header("Referer", "http://community.jbch.org/")
-                        .data("mode", "load_post")
-                        .data("post_uid", result)
-                        .cookies(loginCookie)
-                        .post();
-
-                Element title_bible = doc_bible.select("div.titlebox div.title").first();
-                Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
-
-                System.out.println("-----------------------------------------------------------------------------------------------------------");
-
-                //만나 날짜 스트링
-                DateString = today_date.text();
-                System.out.println("날짜: " + DateString);
-
-                //만나 범위
-                MannaTitleString = title_bible.text();
-                System.out.println("범위: " + MannaTitleString);
-
-                //만나 실제 말씀
-                for (Element e2 : content_bible) {
-                    MannaContentString += e2.text().trim() + "\n\n";
-                }
-
-                System.out.println("-------------------------------------------------------------------------------------------------------");
                 //로그인 실패 조건문
-                if (DateString.equals("") || MannaTitleString.equals("")) {
+                if (today_date == null) {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.postDelayed(new Runnable() {
                         @Override
@@ -196,6 +127,41 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }, 0);
                 }
+                else {
+                    //만나 날짜 스트링
+                    allString = today_date.text() + "\n\n\n";
+
+                    getURL = doc.select("div.conbox.active div.content").first();
+                    thumUrlString = getURL
+                            .attr("onclick")
+                            .replace("getUrl('", "")
+                            .replace("', '')", "");
+
+                    String target = "?uid=";
+                    int target_num = thumUrlString.indexOf(target);
+                    String result;
+                    result = thumUrlString.substring(target_num + 5, thumUrlString.indexOf("&") + 1);
+
+                    //실제 말씀 구절 url로 접속
+                    Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/process.php")
+                            .header("Origin", "http://community.jbch.org")
+                            .header("Referer", "http://community.jbch.org/")
+                            .data("mode", "load_post")
+                            .data("post_uid", result)
+                            .cookies(loginCookie)
+                            .post();
+
+                    Element title_bible = doc_bible.select("div.titlebox div.title").first();
+                    Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
+
+                    //만나 범위
+                    allString += title_bible.text() + "\n\n\n";
+
+                    //만나 말씀
+                    for (Element e2 : content_bible) {
+                        allString += e2.text().trim() + "\n\n";
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -204,50 +170,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            //만나 날짜
-            dateView.setText(DateString);
-            //말씀범위
-            MannaTitleView.setText(MannaTitleString);
-            //말씀
-            MannaContentView.setText(MannaContentString);
+            MannaView.setText(allString);
             progressDialog.dismiss();
         }
     }
 
-    private class JsoupAsyncTask_mcchain extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                //맥체인
-                Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
-                        .get();
-                Elements titles2 = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20]");
-
-                System.out.println("-----------------------------------------------------------------------------------------------------------");
-                //맥체인 범위 스트링
-                mcchainString = titles2.text();
-                System.out.println("맥체인범위: " + mcchainString);
-
-                System.out.println("-------------------------------------------------------------------------------------------------------");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            //맥체인
-            mcchainView_title.setText("오늘의 맥체인");
-            mcchainView_content.setText(mcchainString);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -262,21 +189,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplicationContext(), app_info.class);
                 startActivity(intent1);
                 return true;
+            case R.id.mc_cheyne:
+                Intent intent_mc = new Intent(getApplicationContext(), MccheyneActivity.class);
+                startActivity(intent_mc);
+                return true;
+            case R.id.refresh:
+                //Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
+                allString = "";
+                //파싱 시작
+                jsoupAsyncTask1 = new JsoupAsyncTask1();
+                jsoupAsyncTask1.execute();
             case R.id.re_login:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 SaveSharedPreference.clearUser(MainActivity.this);
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.refresh:
-                //Toast.makeText(getApplicationContext(), "새로고침", Toast.LENGTH_SHORT).show();
-                MannaContentString = "";
-                //파싱 시작
-                jsoupAsyncTask1 = new JsoupAsyncTask1();
-                jsoupAsyncTask1.execute();
-
-                JsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
-                JsoupAsyncTask_mcchain.execute();
             default:
                 return super.onOptionsItemSelected(item);
         }
