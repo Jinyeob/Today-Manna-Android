@@ -2,7 +2,14 @@
 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다. <br>
 플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
 
-## 기능 (업데이트 중 - 1/20)
+## 기능 (업데이트 중 - 1/29)
+3.3.0
+* 디자인 대폭 수정 (최윤서s 디자인)
+* 아이콘 
+* 메뉴로 화면 전환 -> bottom navigation view 로 변경 (만나, 맥체인)
+* 로그인 페이지 스크롤 가능
+* 새로고침 삭제, 앱정보(아이콘) -> 메뉴로 이동
+
 3.2.0
 * 속도향상을 위한 코드 리팩토링
 * 텍스트 왼쪽 정렬
@@ -76,7 +83,7 @@ public class SaveSharedPreference {
 
         editor.commit();
     }
-\
+
     // 저장된 정보 가져오기
     public static String getUserName(Context ctx) {
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
@@ -112,14 +119,14 @@ if (doc == null) {
                 } 
 
 ```
-#### 세부 페이지 파싱 (header 값으로)
+### 세부 페이지 파싱
 <p>
 network 탭의 XHR 필터를 사용해서 묵상 구절을 올리는 페이지로 들어가보았다. 그리고 process.php 파일 프리뷰를 보아하니 아 이걸로 파싱하면 되겠다 싶었음. <br>
-<img src="https://user-images.githubusercontent.com/37360089/72217613-cfadb380-3573-11ea-9e8b-e52b7b55a27d.png" width="40%"></img>
+<img src="https://user-images.githubusercontent.com/37360089/72217613-cfadb380-3573-11ea-9e8b-e52b7b55a27d.png" width="60%"></img>
 </p>
 <p>
 다른 같은 이름의 process.php 와 header값 차이점은 mode가 다르다는 것임!! load_post로 헤더값을 추가. post_uid는 파싱한 해당 url에서 substring으로 잘라서 가져왔음.<br>
-<img src="https://user-images.githubusercontent.com/37360089/72217615-d0dee080-3573-11ea-8631-3a34b255dac1.png" width="40%"></img>
+<img src="https://user-images.githubusercontent.com/37360089/72217615-d0dee080-3573-11ea-8631-3a34b255dac1.png" width="60%"></img>
 </p>
 
 * div에서 가져온 더러운(?) url에서, onclick 속성의 값을 attr로 추출 후 replace를 사용하여 온전한 url 값으로 저장
@@ -151,26 +158,23 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
                     .cookies(loginCookie)
                     .post();
 ```
+
 ## 스크린샷
 
-| <center>로그인</center> | <center>로그인 실패</center> |
+| 로그인 | 메인 화면 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/71947640-e0c39100-3210-11ea-9238-e18f4f95d63c.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/71947650-e325eb00-3210-11ea-9024-3a11d262500e.jpg" width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/73274473-f4b74d00-4228-11ea-8e46-e6c63f1dc522.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274471-f41eb680-4228-11ea-9380-6cbdb77fc292.jpg" width="70%"></img> |
 
-| <center>메인 화면</center> | <center>메뉴</center> |
+| 앱 정보 | 맥체인 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72715553-0313c200-3bb4-11ea-97cf-b18d1bd42cf7.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/72715550-027b2b80-3bb4-11ea-9bfc-635193173910.jpg" width="70%"></img> |
+| <img src="https://user-images.githubusercontent.com/37360089/73274470-f41eb680-4228-11ea-9d10-38aec97cb23d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274472-f41eb680-4228-11ea-83a1-f73cad45cb16.jpg" width="70%"></img> |
 
-| 앱 정보 (i 아이콘) | 새로고침 |
-|:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72715545-00b16800-3bb4-11ea-91be-9819714a3b5f.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/72715554-0313c200-3bb4-11ea-8ea8-4181c7811ba5.jpg" width="70%"></img> |
-
-| 맥체인 |
-|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/72715547-0149fe80-3bb4-11ea-8259-6ebc7d26297f.jpg" width="35%"></img> |
-
-## 출처
+## 도움받은 사이트
 * 파싱: https://partnerjun.tistory.com/43?category=693285/ , https://partnerjun.tistory.com/42
-* 세부 파싱(XHR) https://partnerjun.tistory.com/51
+* 세부 파싱(XHR): https://partnerjun.tistory.com/51
 * 로그인 자동저장: https://bestcoding.tistory.com/7/
-
+* bottom navigation view 관련: https://developer.android.com/reference/android/support/design/widget/BottomNavigationView, https://dev-imaec.tistory.com/11, 
+* bottom navigation view 색상: https://stackoverflow.com/questions/40325422/selected-tabs-color-in-bottom-navigation-view
+* frame layout 라운드처리: https://stackoverflow.com/questions/36208320/framelayout-with-rounded-corners
+* 에디트텍스트 아이콘 사이즈: https://ddolcat.tistory.com/86
+* 커스텀 폰트: https://lktprogrammer.tistory.com/191
