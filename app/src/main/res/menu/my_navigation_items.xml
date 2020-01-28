@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_manna"
+        app:showAsAction="ifRoom"
+        android:title="만나"
+        android:icon="@drawable/ic_tab_manna" />
+    <item android:id="@+id/action_mc"
+        app:showAsAction="ifRoom"
+        android:title="맥체인"
+        android:icon="@drawable/ic_tab_mcheyne" />
+    <!--
+    <item android:id="@+id/action_mypage"
+        app:showAsAction="ifRoom"
+        android:title="마이 페이지"
+        android:icon="@drawable/ic_tab_mypage" />-->
+</menu>

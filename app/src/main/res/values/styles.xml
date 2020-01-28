@@ -4,8 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">#FFFFFFFF</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/back_color</item>
+        <item name="colorAccent">@color/back_color</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

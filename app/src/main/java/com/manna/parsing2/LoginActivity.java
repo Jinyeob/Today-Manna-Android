@@ -32,9 +32,8 @@ public class LoginActivity extends AppCompatActivity {
 
         //툴바
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.myAppName);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
 
         if (SaveSharedPreference.getUserName(LoginActivity.this).length() != 0 && SaveSharedPreference.getUserPasswd(LoginActivity.this).length() != 0) {
             idView.setText(SaveSharedPreference.getUserName(this).toString());
