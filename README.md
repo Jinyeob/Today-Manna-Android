@@ -3,6 +3,9 @@
 플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
 
 ## 기능 (업데이트 중 - 1/29)
+3.3.2
+* 공유버튼 추가
+
 3.3.1
 * 로그인창 툴바 삭제
 * 로그인창 키보드가 텍스트 가리는 문제 해결
@@ -185,3 +188,4 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 * 에디트텍스트 아이콘 사이즈: https://ddolcat.tistory.com/86
 * 커스텀 폰트: https://lktprogrammer.tistory.com/191
 * 키패드 나올때 자동 스크롤: https://tiann.tistory.com/13
+* 클립보드 복사: https://yonoo88.tistory.com/1059
