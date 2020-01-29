@@ -30,8 +30,9 @@
         android:id="@+id/imageView"
         android:layout_width="190dp"
         android:layout_height="200dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/ic_logo" />
@@ -40,7 +41,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="76dp"
         android:gravity="center"
         android:text="아침마다 만나 범위를 확인하는 형제자매님들의\n수고를 덜기 위해 제작되었습니다.\n유용하게 써주셔서 감사합니다 :)"
         android:textColor="#000000"
@@ -56,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/jalnan"
-        android:text="ver 3.3.0"
+        android:text="ver 3.3.1"
         android:textColor="#6A000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +78,19 @@
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:autoLink="email"
+        android:text="오류 제보: jinyeob07@gmail.com"
+        android:textColor="#000000"
+        android:textColorLink="#B0048ECC"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
     <!--
     <TextView
         android:id="@+id/textView6"

@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwdView;
     private Button loginButton;
     private CheckBox autoLogin;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         passwdView = (EditText) findViewById(R.id.editText_passwd);
         loginButton = (Button) findViewById(R.id.button_login);
         autoLogin = (CheckBox) findViewById(R.id.checkBox);
-
-        //툴바
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+        scrollView = (ScrollView) findViewById(R.id.scroll_area);
 
         if (SaveSharedPreference.getUserName(LoginActivity.this).length() != 0 && SaveSharedPreference.getUserPasswd(LoginActivity.this).length() != 0) {
             idView.setText(SaveSharedPreference.getUserName(this).toString());
@@ -41,6 +40,32 @@ public class LoginActivity extends AppCompatActivity {
             autoLogin.setChecked(true);
         }
 
+        idView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus == true) {
+                    scrollView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.smoothScrollBy(0, 800);
+                        }
+                    }, 100);
+                }
+            }
+        });
+        passwdView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus == true) {
+                    scrollView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.smoothScrollBy(0, 800);
+                        }
+                    }, 100);
+                }
+            }
+        });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

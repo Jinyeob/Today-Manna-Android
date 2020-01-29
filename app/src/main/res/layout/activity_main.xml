@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back_color"
+    android:background="#91D9EB"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:itemIconSize="45dp"
+        app:itemIconSize="50dp"
         app:itemIconTint="@color/bnv_color"
         app:itemTextColor="@color/bnv_color"
         app:labelVisibilityMode="unlabeled"
