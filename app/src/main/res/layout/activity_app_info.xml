@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/jalnan"
-        android:text="ver 3.3.1"
+        android:text="ver 3.3.2"
         android:textColor="#6A000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

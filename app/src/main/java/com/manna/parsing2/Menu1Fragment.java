@@ -1,10 +1,13 @@
 package com.manna.parsing2;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,6 +21,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +37,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class Menu1Fragment extends Fragment {
     private String htmlPageUrl = "https://community.jbch.org/confirm.php";
@@ -50,6 +56,7 @@ public class Menu1Fragment extends Fragment {
     private String thumUrlString = "";
     private String allString = "";
 
+    private Button shareButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +72,12 @@ public class Menu1Fragment extends Fragment {
 
         setHasOptionsMenu(true);
 
+
         View v = inflater.inflate(R.layout.fragment_menu1, container, false);
 
-        //일요일일때
+        shareButton=(Button)v.findViewById(R.id.button_share);
+
+                //일요일일때
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat weekdayFormat = new SimpleDateFormat("EE", Locale.getDefault());
         String weekDay = weekdayFormat.format(currentTime);
@@ -83,6 +93,17 @@ public class Menu1Fragment extends Fragment {
         //파싱 시작
         jsoupAsyncTask1 = new JsoupAsyncTask1();
         jsoupAsyncTask1.execute();
+
+        //공유 버튼 리스너
+        shareButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboardManager = (ClipboardManager)getActivity().getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("TEXT", allString);
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(getActivity(), "텍스트가 복사되었습니다.", Toast.LENGTH_LONG).show();
+            }
+        });
 
         return v;
     }
@@ -181,6 +202,7 @@ public class Menu1Fragment extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             MannaView.setText(allString);
+            shareButton.setVisibility(View.VISIBLE);
             progressDialog.dismiss();
         }
     }
