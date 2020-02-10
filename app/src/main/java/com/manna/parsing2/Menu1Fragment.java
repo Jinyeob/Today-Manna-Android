@@ -83,28 +83,28 @@ public class Menu1Fragment extends Fragment {
         String weekDay = weekdayFormat.format(currentTime);
         if (weekDay.equals("일")) {
             Toast.makeText(getActivity(), "일요일은 지원하지 않습니다.", Toast.LENGTH_LONG).show();
-            Intent intent__ = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
-            startActivity(intent__);
-            getActivity().finish();
+           // Intent intent__ = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+          // startActivity(intent__);
+          //  getActivity().finish();
         }
+        else {
+            MannaView = (TextView) v.findViewById(R.id.textView);
 
-        MannaView = (TextView) v.findViewById(R.id.textView);
+            //파싱 시작
+            jsoupAsyncTask1 = new JsoupAsyncTask1();
+            jsoupAsyncTask1.execute();
 
-        //파싱 시작
-        jsoupAsyncTask1 = new JsoupAsyncTask1();
-        jsoupAsyncTask1.execute();
-
-        //공유 버튼 리스너
-        shareButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClipboardManager clipboardManager = (ClipboardManager)getActivity().getSystemService(CLIPBOARD_SERVICE);
-                ClipData clipData = ClipData.newPlainText("TEXT", allString);
-                clipboardManager.setPrimaryClip(clipData);
-                Toast.makeText(getActivity(), "텍스트가 복사되었습니다.", Toast.LENGTH_LONG).show();
-            }
-        });
-
+            //공유 버튼 리스너
+            shareButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("TEXT", allString);
+                    clipboardManager.setPrimaryClip(clipData);
+                    Toast.makeText(getActivity(), "텍스트가 복사되었습니다.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         return v;
     }
 
