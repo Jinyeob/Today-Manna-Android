@@ -12,7 +12,7 @@
 <a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="30%"/></a>
 
 
-## Version Note
+## 📌 Version Note
 3.4
 * 절 별 개행이 되지 않는 오류 해결
 
@@ -66,9 +66,9 @@
 
 
 
-## Code
+## 📌 Code
 
-### 로그인
+### 👤 로그인
 1. 먼저, FirstAuthActivity에서 자동저장 여부를 확인합니다. <br>
 2. 자동저장이 되어있다면, MainActivity로 로그인 정보와 함께 화면을 전환합니다. <br>
 2-1. 자동저장이 되어있지 않다면, LoginActivity로 화면 전환 후, 아이디와 패스워드를 입력합니다.
@@ -144,7 +144,7 @@ if (doc == null) {
                 } 
 
 ```
-### 세부 페이지 파싱
+### 📝 세부 페이지 파싱
 <p>
 network 탭의 XHR 필터를 사용해서 묵상 구절을 올리는 페이지로 들어가보았다. 그리고 process.php 파일 프리뷰를 보아하니 아 이걸로 파싱하면 되겠다 싶었음. <br>
 <img src="https://user-images.githubusercontent.com/37360089/72217613-cfadb380-3573-11ea-9e8b-e52b7b55a27d.png" width="60%"></img>
@@ -184,7 +184,7 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
                     .post();
 ```
 
-## Screenshots
+## 📌 Screenshots
 
 | 로그인 | 메인 화면 |
 |:--------:|:--------:|
@@ -194,7 +194,7 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 |:--------:|:--------:|
 | <img src="https://user-images.githubusercontent.com/37360089/73274470-f41eb680-4228-11ea-9d10-38aec97cb23d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274472-f41eb680-4228-11ea-83a1-f73cad45cb16.jpg" width="70%"></img> |
 
-## Reference
+## 📌 Reference
 * 파싱: https://partnerjun.tistory.com/43?category=693285/ , https://partnerjun.tistory.com/42
 * 세부 파싱(XHR): https://partnerjun.tistory.com/51
 * 로그인 자동저장: https://bestcoding.tistory.com/7/
