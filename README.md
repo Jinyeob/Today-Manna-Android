@@ -1,5 +1,5 @@
 # Today_manna
-오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다. <br>
+> 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.
 플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
 
 ## 기능
