@@ -66,7 +66,7 @@
 
 
 
-## 기능 설명
+## Code
 
 ### 로그인
 1. 먼저, FirstAuthActivity에서 자동저장 여부를 확인합니다. <br>
@@ -184,7 +184,7 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
                     .post();
 ```
 
-## 스크린샷
+## Screenshots
 
 | 로그인 | 메인 화면 |
 |:--------:|:--------:|
@@ -194,7 +194,7 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 |:--------:|:--------:|
 | <img src="https://user-images.githubusercontent.com/37360089/73274470-f41eb680-4228-11ea-9d10-38aec97cb23d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274472-f41eb680-4228-11ea-83a1-f73cad45cb16.jpg" width="70%"></img> |
 
-## 도움받은 사이트
+## Reference
 * 파싱: https://partnerjun.tistory.com/43?category=693285/ , https://partnerjun.tistory.com/42
 * 세부 파싱(XHR): https://partnerjun.tistory.com/51
 * 로그인 자동저장: https://bestcoding.tistory.com/7/
