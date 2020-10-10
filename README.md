@@ -3,13 +3,13 @@
 ![last commit badge](https://img.shields.io/github/last-commit/Jinyeob/Today-Manna-Android)
 <a href='https://developer.android.com'><img height="20px" src='http://img.shields.io/badge/platform-android-green.svg'/></a>
 
-<p align="center">
+<p>
    Provides today's Bible scope, verses and Mc'cheine scope.<br/>
    You can see also <a href="https://github.com/Jinyeob/Today-Manna-iOS" target="_blank">iOS</a> version.
 </p>
 
 ## Download
-<a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="50%"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="30%"/></a>
 
 
 ## Version Note
