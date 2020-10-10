@@ -1,7 +1,9 @@
 <h1 align="center">오늘의 만나 Android</h1>
+![last commit badge](https://img.shields.io/github/last-commit/Jinyeob/Today-Manna-Android)
+> Provides today's Bible scope, verses and Mc'cheine scope. (Scraped from 'community.jbch.org')
 
-> 오늘의 묵상 범위를 community.jbch.org에 로그인 후 파싱하여 보여주는 앱입니다.<br>
-플레이스토어 다운로드: https://play.google.com/store/apps/details?id=com.manna.parsing2
+<a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="50%"/></a>
+
 
 ## 기능
 3.4
