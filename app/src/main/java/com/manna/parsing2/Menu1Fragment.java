@@ -188,10 +188,17 @@ public class Menu1Fragment extends Fragment {
                     //만나 범위
                     allString += title_bible.text() + "\n\n\n";
 
+                    System.out.println(allString);
+
                     //만나 말씀
                     for (Element e2 : content_bible) {
-                        allString += e2.text().trim() + "\n\n";
+                        String text =e2.html();
+                        text = text.replaceAll("<br>", "\n\n");
+                        allString+=text;
+                      //  allString += e2.text().trim() + "\n\n";
                     }
+
+                    System.out.println(allString);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
