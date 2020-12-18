@@ -5,9 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#FFFFFF"
+    android:background="#e2e2e2e2"
     android:orientation="vertical"
     tools:context=".LoginActivity">
+
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:background="#00000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakeAlphaMax="255"
+        app:snowflakeAlphaMin="150"
+        app:snowflakeAngleMax="5"
+        app:snowflakeImage="@drawable/snowflake"
+        app:snowflakeSizeMax="32dp"
+        app:snowflakeSizeMin="8dp"
+        app:snowflakeSpeedMax="5"
+        app:snowflakeSpeedMin="2"
+        app:snowflakesAlreadyFalling="false"
+        app:snowflakesFadingEnabled="true"
+        app:snowflakesNum="130" />
 
     <ScrollView
         android:id="@+id/scroll_area"
@@ -67,17 +83,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <Button
-                android:id="@+id/button_login"
-                android:layout_width="133dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/ic_button_go"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.507"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
             <CheckBox
                 android:id="@+id/checkBox"
@@ -94,12 +99,26 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="28dp"
                 android:text="깨사모 아이디와 비밀번호를 입력해주세요"
                 app:layout_constraintEnd_toEndOf="@+id/editText_id"
-                app:layout_constraintHorizontal_bias="0.448"
+                app:layout_constraintHorizontal_bias="0.456"
                 app:layout_constraintStart_toStartOf="@+id/editText_id"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <Button
+                android:id="@+id/button_login"
+                android:layout_width="133dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ic_button_go"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
