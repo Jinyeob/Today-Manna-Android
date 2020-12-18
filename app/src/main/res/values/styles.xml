@@ -7,5 +7,7 @@
         <item name="colorPrimaryDark">@color/back_color</item>
         <item name="colorAccent">@color/back_color</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:textColorSecondary">@color/chirstmasRedLight</item>
+
     </style>
 </resources>
