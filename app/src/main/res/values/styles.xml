@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -8,6 +7,6 @@
         <item name="colorAccent">@color/back_color</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:textColorSecondary">@color/chirstmasRedLight</item>
-
     </style>
 </resources>
+

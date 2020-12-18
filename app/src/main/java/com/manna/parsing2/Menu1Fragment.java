@@ -160,7 +160,7 @@ public class Menu1Fragment extends Fragment {
                     }, 0);
                 } else {
                     //만나 날짜 스트링
-                    allString = today_date.text() + "\n\n\n";
+                    allString = today_date.text() + "\n\n";
 
                     getURL = doc.select("div.conbox.active div.content").first();
                     thumUrlString = getURL
@@ -186,7 +186,7 @@ public class Menu1Fragment extends Fragment {
                     Elements content_bible = doc_bible.select("div.contentbox.fr-view p");
 
                     //만나 범위
-                    allString += title_bible.text() + "\n\n\n";
+                    allString += title_bible.text() + "\n\n";
 
                     //만나 구절
                     String text =content_bible.first().html();
