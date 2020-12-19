@@ -1,4 +1,4 @@
-package com.manna.parsing2;
+package com.manna.parsing2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.manna.parsing2.R;
 
 public class Menu3Fragment extends Fragment {
 

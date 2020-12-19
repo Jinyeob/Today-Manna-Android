@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:background="#e2e2e2e2"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <com.jetradarmobile.snowfall.SnowfallView
         android:background="#00000000"

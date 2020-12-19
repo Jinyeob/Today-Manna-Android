@@ -1,55 +1,50 @@
-package com.manna.parsing2;
+package com.manna.parsing2.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.os.AsyncTask;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import android.os.AsyncTask;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+import com.manna.parsing2.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-
-public class MccheyneActivity extends AppCompatActivity {
-    private JsoupAsyncTask_mcchain JsoupAsyncTask_mcchain;
+public class MccheyneFragment extends Fragment {
     private TextView mcchainView_content;
 
     private String mcchainString = "";
 
+    @SuppressLint("SetJavaScriptEnabled")
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mccheyne);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
+        View v = inflater.inflate(R.layout.fragment_mccheyne, container, false);
 
         //맥체인 텍스트뷰
-        mcchainView_content = (TextView) findViewById(R.id.textView_mc);
+        mcchainView_content = (TextView) v.findViewById(R.id.textView2);
 
-        JsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
-        JsoupAsyncTask_mcchain.execute();
+        MccheyneFragment.JsoupAsyncTask_mcchain jsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
+        jsoupAsyncTask_mcchain.execute();
+
+        return v;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
-                finish();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    @SuppressLint("StaticFieldLeak")
     private class JsoupAsyncTask_mcchain extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {

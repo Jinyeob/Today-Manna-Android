@@ -1,13 +1,10 @@
-package com.manna.parsing2;
+package com.manna.parsing2.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +22,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.manna.parsing2.R;
+import com.manna.parsing2.login.LoginActivity;
+import com.manna.parsing2.login.SaveSharedPreference;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,23 +42,16 @@ import java.util.Map;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
-public class Menu1Fragment extends Fragment {
-    private String htmlPageUrl = "https://community.jbch.org/confirm.php";
-    private JsoupAsyncTask1 jsoupAsyncTask1;
-
-    private Map<String, String> loginCookie;
-    private Document doc;
-    private Element getURL;
+public class MannaFragment extends Fragment {
 
     private TextView MannaView;
 
     private String ID = "";
     private String PASSWD = "";
 
-    private String thumUrlString = "";
     private String allString = "";
 
-    private Button shareButton;
+    private FloatingActionButton shareButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,25 +68,23 @@ public class Menu1Fragment extends Fragment {
         setHasOptionsMenu(true);
 
 
-        View v = inflater.inflate(R.layout.fragment_menu1, container, false);
+        View v = inflater.inflate(R.layout.fragment_manna, container, false);
 
-        shareButton=(Button)v.findViewById(R.id.button_share);
+        shareButton=v.findViewById(R.id.button_share);
 
-                //일요일일때
+        //일요일일때
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat weekdayFormat = new SimpleDateFormat("EE", Locale.getDefault());
         String weekDay = weekdayFormat.format(currentTime);
         if (weekDay.equals("일")) {
             Toast.makeText(getActivity(), "일요일은 지원하지 않습니다.", Toast.LENGTH_LONG).show();
-           // Intent intent__ = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
-          // startActivity(intent__);
-          //  getActivity().finish();
+            shareButton.hide();
         }
         else {
             MannaView = (TextView) v.findViewById(R.id.textView);
 
             //파싱 시작
-            jsoupAsyncTask1 = new JsoupAsyncTask1();
+            JsoupAsyncTask1 jsoupAsyncTask1 = new JsoupAsyncTask1();
             jsoupAsyncTask1.execute();
 
             //공유 버튼 리스너
@@ -101,13 +94,20 @@ public class Menu1Fragment extends Fragment {
                     ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
                     ClipData clipData = ClipData.newPlainText("TEXT", allString);
                     clipboardManager.setPrimaryClip(clipData);
-                    Toast.makeText(getActivity(), "텍스트가 복사되었습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "텍스트가 복사되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, allString);
+                    Intent chooser = Intent.createChooser(intent, "공유하기");
+                    startActivity(chooser);
                 }
             });
         }
         return v;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class JsoupAsyncTask1 extends AsyncTask<Void, Void, Void> {
         private ProgressDialog progressDialog;
 
@@ -125,6 +125,7 @@ public class Menu1Fragment extends Fragment {
         protected Void doInBackground(Void... params) {
             try {
                 //깨사모
+                String htmlPageUrl = "https://community.jbch.org/confirm.php";
                 Connection.Response res = Jsoup.connect(htmlPageUrl)
                         .data("user_id", ID)
                         .data("saveid", "1")
@@ -138,8 +139,8 @@ public class Menu1Fragment extends Fragment {
                         .method(Connection.Method.POST)
                         .execute();
 
-                loginCookie = res.cookies();
-                doc = Jsoup.connect("https://community.jbch.org/")
+                Map<String, String> loginCookie = res.cookies();
+                Document doc = Jsoup.connect("https://community.jbch.org/")
                         .cookies(loginCookie)
                         .get();
 
@@ -162,8 +163,8 @@ public class Menu1Fragment extends Fragment {
                     //만나 날짜 스트링
                     allString = today_date.text() + "\n\n";
 
-                    getURL = doc.select("div.conbox.active div.content").first();
-                    thumUrlString = getURL
+                    Element getURL = doc.select("div.conbox.active div.content").first();
+                    String thumUrlString = getURL
                             .attr("onclick")
                             .replace("getUrl('", "")
                             .replace("', '')", "");
@@ -209,7 +210,7 @@ public class Menu1Fragment extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             MannaView.setText(allString);
-            shareButton.setVisibility(View.VISIBLE);
+            shareButton.show();
             progressDialog.dismiss();
         }
     }

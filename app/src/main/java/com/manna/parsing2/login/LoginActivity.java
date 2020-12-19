@@ -1,26 +1,26 @@
-package com.manna.parsing2;
+package com.manna.parsing2.login;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.manna.parsing2.activity.MainActivity;
+import com.manna.parsing2.R;
+import com.manna.parsing2.activity.InfoActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText idView;
     private EditText passwdView;
-    private Button loginButton;
     private CheckBox autoLogin;
     private ScrollView scrollView;
 
@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         idView = (EditText) findViewById(R.id.editText_id);
         passwdView = (EditText) findViewById(R.id.editText_passwd);
-        loginButton = (Button) findViewById(R.id.button_login);
+        Button loginButton = (Button) findViewById(R.id.button_login);
         autoLogin = (CheckBox) findViewById(R.id.checkBox);
         scrollView = (ScrollView) findViewById(R.id.scroll_area);
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         idView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == true) {
+                if (hasFocus) {
                     scrollView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         passwdView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == true) {
+                if (hasFocus) {
                     scrollView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -101,13 +101,11 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.info:
-                Intent intent_ = new Intent(getApplicationContext(), app_info.class);
-                startActivity(intent_);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.info) {
+            Intent intent_ = new Intent(getApplicationContext(), InfoActivity.class);
+            startActivity(intent_);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

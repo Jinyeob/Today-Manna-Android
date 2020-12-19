@@ -1,4 +1,4 @@
-package com.manna.parsing2;
+package com.manna.parsing2.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -17,7 +17,7 @@ public class SaveSharedPreference {
         editor.putString(PREF_USER_NAME, userName);
         editor.putString(PREF_USER_PASSWD, userPasswd);
 
-        editor.commit();
+        editor.apply();
     }
 
     // 저장된 정보 가져오기
@@ -31,6 +31,6 @@ public class SaveSharedPreference {
     public static void clearUser(Context ctx) {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 }

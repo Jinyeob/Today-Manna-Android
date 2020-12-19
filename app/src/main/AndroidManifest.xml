@@ -14,18 +14,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MccheyneActivity"></activity>
-        <activity android:name=".app_info" />
-        <activity android:name=".FirstAuthActivity">
+<!--        <activity android:name=".MccheyneActivity"></activity>-->
+        <activity android:name=".activity.InfoActivity" />
+        <activity android:name=".login.FirstAuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".login.LoginActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
