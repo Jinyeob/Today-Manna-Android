@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.os.AsyncTask;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.manna.parsing2.R;
@@ -23,9 +20,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 public class MccheyneFragment extends Fragment {
-    private TextView mcchainView_content;
+    private TextView mccheyneView_content;
 
-    private String mcchainString = "";
+    private String mccheyneString = "";
 
     @SuppressLint("SetJavaScriptEnabled")
     @Nullable
@@ -36,7 +33,7 @@ public class MccheyneFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_mccheyne, container, false);
 
         //맥체인 텍스트뷰
-        mcchainView_content = (TextView) v.findViewById(R.id.textView2);
+        mccheyneView_content = v.findViewById(R.id.textView2);
 
         MccheyneFragment.JsoupAsyncTask_mcchain jsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
         jsoupAsyncTask_mcchain.execute();
@@ -60,7 +57,7 @@ public class MccheyneFragment extends Fragment {
                 Elements titles2 = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20]");
 
                 //맥체인 범위 스트링
-                mcchainString = titles2.text();
+                mccheyneString = titles2.text();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,7 +66,7 @@ public class MccheyneFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            mcchainView_content.setText(mcchainString);
+            mccheyneView_content.setText(mccheyneString);
         }
     }
 }

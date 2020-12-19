@@ -41,7 +41,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:clipChildren="true"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
 <androidx.cardview.widget.CardView
