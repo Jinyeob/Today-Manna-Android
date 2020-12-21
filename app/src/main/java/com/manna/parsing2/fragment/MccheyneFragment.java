@@ -20,6 +20,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MccheyneFragment extends Fragment {
@@ -39,6 +41,7 @@ public class MccheyneFragment extends Fragment {
 
         //맥체인 텍스트뷰
         mccheyneView_content = v.findViewById(R.id.textView2);
+        titles=new ArrayList<String>();
 
         MccheyneFragment.JsoupAsyncTask_mcchain jsoupAsyncTask_mcchain = new JsoupAsyncTask_mcchain();
         jsoupAsyncTask_mcchain.execute();
@@ -63,6 +66,7 @@ public class MccheyneFragment extends Fragment {
 
                 for(Element e : titleElements){
                     titles.add(e.text());
+                    mccheyneString+=e.text()+"\n";
                 }
 
                 //맥체인 범위 스트링

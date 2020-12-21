@@ -1,19 +1,17 @@
 {
-  "version": 1,
+  "version": 2,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
   },
   "applicationId": "com.manna.parsing2",
-  "variantName": "release",
+  "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "properties": [],
-      "versionCode": 12,
-      "versionName": "12",
-      "enabled": true,
+      "versionCode": 13,
+      "versionName": "3.4.2",
       "outputFile": "app-release.apk"
     }
   ]

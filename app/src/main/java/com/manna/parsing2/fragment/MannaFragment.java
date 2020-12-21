@@ -118,6 +118,7 @@ public class MannaFragment extends Fragment {
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setMessage("불러오는 중...");
+            progressDialog.setCancelable(false);
             progressDialog.show();
         }
 

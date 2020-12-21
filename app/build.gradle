@@ -7,8 +7,8 @@ android {
         applicationId "com.manna.parsing2"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 12
-        versionName "3.4.1"
+        versionCode 13
+        versionName "3.4.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

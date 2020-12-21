@@ -21,10 +21,9 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="411dp"
-            android:layout_height="84dp"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
             android:background="@android:color/transparent"
-            android:text=""
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
