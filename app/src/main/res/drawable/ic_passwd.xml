@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:drawable="@drawable/ic_passwd_christmas"
+        android:width="15sp"
+        android:height="15sp"
+        />
+
+</layer-list >

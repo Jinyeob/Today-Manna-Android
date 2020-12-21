@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chirstmasGreenLight"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="82dp"
-        android:background="@color/chirstmasGreenLight"
-        android:text=""
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationView">
 
         <ImageView
-            android:id="@+id/toolbar_title"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            app:srcCompat="@drawable/ic_nav_maintitle" />
+            android:background="@drawable/back"
+            />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="411dp"
+            android:layout_height="84dp"
+            android:background="@android:color/transparent"
+            android:text=""
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-    </androidx.appcompat.widget.Toolbar>
+            <ImageView
+                android:id="@+id/toolbar_title"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_nav_maintitle" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_shape"
-        app:layout_constraintBottom_toTopOf="@id/navigationView"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardBackgroundColor="#00000000"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="0dp"
-    >
-    <com.jetradarmobile.snowfall.SnowfallView
-        android:background="#00000000"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        app:snowflakeAlphaMax="255"
-        app:snowflakeAlphaMin="150"
-        app:snowflakeAngleMax="5"
-        app:snowflakeImage="@drawable/snowflake"
-        app:snowflakeSizeMax="32dp"
-        app:snowflakeSizeMin="8dp"
-        app:snowflakeSpeedMax="5"
-        app:snowflakeSpeedMin="2"
-        app:snowflakesAlreadyFalling="false"
-        app:snowflakesFadingEnabled="true"
-        app:snowflakesNum="130" />
-</androidx.cardview.widget.CardView>
+        </androidx.appcompat.widget.Toolbar>
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:background="@drawable/rounded_shape">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_shape">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="#00000000"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp">
+
+                    <com.jetradarmobile.snowfall.SnowfallView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#00000000"
+                        app:snowflakeAlphaMax="255"
+                        app:snowflakeAlphaMin="150"
+                        app:snowflakeAngleMax="5"
+                        app:snowflakeImage="@drawable/snowflake"
+                        app:snowflakeSizeMax="32dp"
+                        app:snowflakeSizeMin="8dp"
+                        app:snowflakeSpeedMax="5"
+                        app:snowflakeSpeedMin="2"
+                        app:snowflakesAlreadyFalling="false"
+                        app:snowflakesFadingEnabled="true"
+                        app:snowflakesNum="130" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+
+        </FrameLayout>
+
+    </RelativeLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -84,5 +98,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/my_navigation_items" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#e2e2e2e2"
+    android:background="@drawable/ic_back_login"
     android:orientation="vertical"
     tools:context=".login.LoginActivity">
 
@@ -43,46 +43,49 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="190dp"
                 android:layout_height="200dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="128dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_logo" />
-
-            <EditText
-                android:id="@+id/editText_passwd"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:drawableLeft="@drawable/passwd_icon"
-                android:drawablePadding="15dp"
-                android:ems="10"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="@+id/editText_id"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editText_id"
-                app:layout_constraintTop_toBottomOf="@+id/editText_id" />
+                app:srcCompat="@drawable/ic_logo_christmas3" />
 
             <EditText
                 android:id="@+id/editText_id"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_width="320dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/login_icon"
+                android:drawableLeft="@drawable/ic_id"
                 android:drawablePadding="15dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="false"
+                android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.522"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+
+            <EditText
+                android:id="@+id/editText_passwd"
+                android:layout_width="320dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_passwd"
+                android:drawablePadding="15dp"
+                android:ems="10"
+                android:textColor="@android:color/white"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="@+id/editText_id"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/editText_id"
+                app:layout_constraintTop_toBottomOf="@+id/editText_id" />
 
             <CheckBox
                 android:id="@+id/checkBox"
@@ -90,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="로그인 상태 유지"
+                android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,8 +103,9 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="28dp"
                 android:text="깨사모 아이디와 비밀번호를 입력해주세요"
+                android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="@+id/editText_id"
                 app:layout_constraintHorizontal_bias="0.456"
                 app:layout_constraintStart_toStartOf="@+id/editText_id"
@@ -112,7 +117,7 @@
                 android:layout_height="53dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/ic_button_go"
+                android:background="@drawable/ic_button_go_christmas"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.507"
@@ -123,3 +128,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    android:background="#e2e2e2e2"-->

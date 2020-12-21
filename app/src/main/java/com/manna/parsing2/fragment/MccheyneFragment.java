@@ -16,13 +16,18 @@ import com.manna.parsing2.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.List;
+
 public class MccheyneFragment extends Fragment {
     private TextView mccheyneView_content;
 
     private String mccheyneString = "";
+  //  private String[] titles=new String[10];
+    private List<String> titles;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Nullable
@@ -54,10 +59,14 @@ public class MccheyneFragment extends Fragment {
                 //맥체인
                 Document doc2 = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
                         .get();
-                Elements titles2 = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20]");
+                Elements titleElements = doc2.select("div.content.xe_content tr[bgcolor=#FFFFFF][align=center][height=20] td");
+
+                for(Element e : titleElements){
+                    titles.add(e.text());
+                }
 
                 //맥체인 범위 스트링
-                mccheyneString = titles2.text();
+                //mccheyneString = titles2.text();
             } catch (IOException e) {
                 e.printStackTrace();
             }
