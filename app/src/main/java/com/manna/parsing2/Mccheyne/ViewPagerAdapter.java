@@ -18,10 +18,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         items.add(new FragmentMc3());
         items.add(new FragmentMc4());
 
-        titles.add("1");
-        titles.add("2");
-        titles.add("3");
-        titles.add("4");
+        titles.add("⚽️");
+        titles.add("🏀");
+        titles.add("🏈");
+        titles.add("⚾️");
     }
 
     @Override

@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     private final FragmentManager fragmentManager = getSupportFragmentManager();
 
-    private final MannaFragment mannaFragment = new MannaFragment();
-    private final MccheyneFragment mccheyneFragment = new MccheyneFragment();
-    private final Menu3Fragment menu3Fragment = new Menu3Fragment();
+    private  MannaFragment mannaFragment;
+    private  MccheyneFragment mccheyneFragment;
+//    private  Menu3Fragment menu3Fragment = new Menu3Fragment();
 
     public static final List<List<Mccheyne>> AllList = new ArrayList<>();
     public static String[] mcString=new String[4];
@@ -57,22 +57,42 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
 
         // 첫 화면 지정
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, mannaFragment).commitAllowingStateLoss();
+        mannaFragment = new MannaFragment();
+        fragmentManager.beginTransaction().replace(R.id.frameLayout, mannaFragment).commit();
 
         // bottomNavigationView의 아이템이 선택될 때 호출될 리스너 등록
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.action_manna: {
-                        transaction.replace(R.id.frameLayout, mannaFragment).commitAllowingStateLoss();
+                        if(mannaFragment==null) {
+                            mannaFragment=new MannaFragment();
+                            fragmentManager.beginTransaction().add(R.id.frameLayout, mannaFragment).commit();
+                        }
+                        if(mannaFragment!=null) {
+                            fragmentManager.beginTransaction().show(mannaFragment).commit();
+                        }
+                        if(mccheyneFragment!=null){
+                            fragmentManager.beginTransaction().hide(mccheyneFragment).commit();
+                        }
+//                        transaction.replace(R.id.frameLayout, mannaFragment).commitAllowingStateLoss();
                         break;
                     }
                     case R.id.action_mc: {
-                        transaction.replace(R.id.frameLayout, mccheyneFragment).commitAllowingStateLoss();
+                        if(mccheyneFragment==null) {
+                            mccheyneFragment=new MccheyneFragment();
+                            fragmentManager.beginTransaction().add(R.id.frameLayout, mccheyneFragment).commit();
+                        }
+                        if(mannaFragment!=null) {
+                            fragmentManager.beginTransaction().hide(mannaFragment).commit();
+                        }
+                        if(mccheyneFragment!=null){
+                            fragmentManager.beginTransaction().show(mccheyneFragment).commit();
+                        }
+//                        transaction.replace(R.id.frameLayout, mccheyneFragment).commitAllowingStateLoss();
                         break;
                     }/*
                     case R.id.action_mypage: {
