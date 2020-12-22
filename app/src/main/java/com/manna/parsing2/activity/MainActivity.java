@@ -8,17 +8,28 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.manna.parsing2.Model.Mccheyne;
 import com.manna.parsing2.R;
 import com.manna.parsing2.fragment.MannaFragment;
 import com.manna.parsing2.Mccheyne.MccheyneFragment;
 import com.manna.parsing2.fragment.Menu3Fragment;
 import com.manna.parsing2.login.LoginActivity;
 import com.manna.parsing2.login.SaveSharedPreference;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,10 +39,15 @@ public class MainActivity extends AppCompatActivity {
     private final MccheyneFragment mccheyneFragment = new MccheyneFragment();
     private final Menu3Fragment menu3Fragment = new Menu3Fragment();
 
+    public static final List<List<Mccheyne>> AllList = new ArrayList<>();
+    public static String[] mcString=new String[4];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Execute();
 
         //툴바
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,6 +107,156 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void Execute(){
+        JsoupAsyncTask_mcchain1 jsoupAsyncTask_mcchain1 = new JsoupAsyncTask_mcchain1();
+        JsoupAsyncTask_mcchain2 jsoupAsyncTask_mcchain2 = new JsoupAsyncTask_mcchain2();
+        JsoupAsyncTask_mcchain3 jsoupAsyncTask_mcchain3 = new JsoupAsyncTask_mcchain3();
+        JsoupAsyncTask_mcchain4 jsoupAsyncTask_mcchain4 = new JsoupAsyncTask_mcchain4();
+
+        jsoupAsyncTask_mcchain1.execute();
+        jsoupAsyncTask_mcchain2.execute();
+        jsoupAsyncTask_mcchain3.execute();
+        jsoupAsyncTask_mcchain4.execute();
+    }
+
+    public static String  GetData(Document doc){
+        Elements textElements = doc.select("tr[class=li_f_size] td");
+
+        List<Mccheyne> MList=new ArrayList<>();
+
+        int i=0;
+        Mccheyne content=new Mccheyne();
+        for(Element e : textElements){
+            if(i==0){
+                content.setTitle(e.text());
+                i++;
+            }
+            else if(i==1){
+                content.setPoint(e.text());
+                i++;
+            }
+            else if(i==2){
+                content.setText(e.text());
+                i=0;
+                MList.add(content);
+                content=new Mccheyne();
+            }
+        }
+        String result="";
+        for(Mccheyne node : MList){
+            result+= (node.getTitle() + node.getPoint() + "\n");
+            result+=(node.getText()+"\n\n");
+        }
+        AllList.add(MList);
+
+        return result;
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class JsoupAsyncTask_mcchain1 extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+
+                Document doc = Jsoup.connect("http://www.bible4u.pe.kr/zbxe/read")
+                        .get();
+                mcString[0] = GetData(doc);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+        }
+    }
+    @SuppressLint("StaticFieldLeak")
+    private class JsoupAsyncTask_mcchain2 extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Document doc = Jsoup.connect("http://bible4u.pe.kr/zbxe/?mid=open_read&ver=korean_krv&b_num=2")
+                        .get();
+
+                mcString[1] = GetData(doc);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+        }
+    }
+    @SuppressLint("StaticFieldLeak")
+    private class JsoupAsyncTask_mcchain3 extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Document doc = Jsoup.connect("http://bible4u.pe.kr/zbxe/?mid=open_read&ver=korean_krv&b_num=3")
+                        .get();
+
+                mcString[2] = GetData(doc);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+        }
+    }
+    @SuppressLint("StaticFieldLeak")
+    private class JsoupAsyncTask_mcchain4 extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Document doc = Jsoup.connect("http://bible4u.pe.kr/zbxe/?mid=open_read&ver=korean_krv&b_num=4")
+                        .get();
+
+                mcString[3] = GetData(doc);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
         }
     }
 }
