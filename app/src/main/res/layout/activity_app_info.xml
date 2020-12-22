@@ -26,71 +26,90 @@
 <!--            app:srcCompat="@drawable/ic_nav_maintitle" />-->
     </androidx.appcompat.widget.Toolbar>
 
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:id="@+id/snowfallView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        app:snowflakeAlphaMax="255"
+        app:snowflakeAlphaMin="150"
+        app:snowflakeAngleMax="5"
+        app:snowflakeImage="@drawable/snowflake"
+        app:snowflakeSizeMax="32dp"
+        app:snowflakeSizeMin="8dp"
+        app:snowflakeSpeedMax="5"
+        app:snowflakeSpeedMin="2"
+        app:snowflakesAlreadyFalling="false"
+        app:snowflakesFadingEnabled="true"
+        app:snowflakesNum="130" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="190dp"
         android:layout_height="200dp"
-        android:layout_marginTop="108dp"
+        app:layout_constraintBottom_toBottomOf="@+id/snowfallView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.429"
         app:srcCompat="@drawable/ic_logo_christmas3" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="아침마다 만나 범위를 확인하는 형제자매님들의\n수고를 덜기 위해 제작되었습니다.\n유용하게 써주셔서 감사합니다 :)"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+    <!--    <TextView-->
+<!--        android:id="@+id/textView7"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="아침마다 만나 범위를 확인하는 형제자매님들의\n수고를 덜기 위해 제작되었습니다.\n유용하게 써주셔서 감사합니다 :)"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="15sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/jalnan"
-        android:text="ver 3.4.2"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView8"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:fontFamily="@font/jalnan"-->
+<!--        android:text="ver 3.4.2"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:autoLink="web"
-        android:text="github: https://github.com/Jinyeob/Today_manna"
-        android:textColor="#FFFFFF"
-        android:textColorLink="@android:color/holo_blue_light"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView9"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:autoLink="web"-->
+<!--        android:text="github: https://github.com/Jinyeob/Today_manna"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textColorLink="@android:color/holo_blue_light"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.508"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:autoLink="email"
-        android:text="오류 제보: jinyeob07@gmail.com"
-        android:textColor="#FFFFFF"
-        android:textColorLink="@android:color/holo_blue_light"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:autoLink="email"-->
+<!--        android:text="오류 제보: jinyeob07@gmail.com"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textColorLink="@android:color/holo_blue_light"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/textView9"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
     <!--
     <TextView
         android:id="@+id/textView6"

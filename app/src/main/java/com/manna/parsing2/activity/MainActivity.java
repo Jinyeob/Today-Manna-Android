@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.manna.parsing2.R;
 import com.manna.parsing2.fragment.MannaFragment;
-import com.manna.parsing2.fragment.MccheyneFragment;
+import com.manna.parsing2.Mccheyne.MccheyneFragment;
 import com.manna.parsing2.fragment.Menu3Fragment;
 import com.manna.parsing2.login.LoginActivity;
 import com.manna.parsing2.login.SaveSharedPreference;
