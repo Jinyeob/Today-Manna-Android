@@ -1,4 +1,4 @@
-package com.manna.parsing2.fragment;
+package com.manna.parsing2.Manna;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;

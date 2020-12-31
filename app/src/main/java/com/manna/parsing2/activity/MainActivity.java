@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,9 +15,8 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.manna.parsing2.Model.Mccheyne;
 import com.manna.parsing2.R;
-import com.manna.parsing2.fragment.MannaFragment;
+import com.manna.parsing2.Manna.MannaFragment;
 import com.manna.parsing2.Mccheyne.MccheyneFragment;
-import com.manna.parsing2.fragment.Menu3Fragment;
 import com.manna.parsing2.login.LoginActivity;
 import com.manna.parsing2.login.SaveSharedPreference;
 
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     private  MannaFragment mannaFragment;
     private  MccheyneFragment mccheyneFragment;
-//    private  Menu3Fragment menu3Fragment = new Menu3Fragment();
 
     public static final List<List<Mccheyne>> AllList = new ArrayList<>();
     public static String[] mcString=new String[4];
@@ -65,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.action_manna: {
                         if(mannaFragment==null) {
@@ -78,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                         if(mccheyneFragment!=null){
                             fragmentManager.beginTransaction().hide(mccheyneFragment).commit();
                         }
-//                        transaction.replace(R.id.frameLayout, mannaFragment).commitAllowingStateLoss();
                         break;
                     }
                     case R.id.action_mc: {
@@ -92,13 +87,8 @@ public class MainActivity extends AppCompatActivity {
                         if(mccheyneFragment!=null){
                             fragmentManager.beginTransaction().show(mccheyneFragment).commit();
                         }
-//                        transaction.replace(R.id.frameLayout, mccheyneFragment).commitAllowingStateLoss();
                         break;
-                    }/*
-                    case R.id.action_mypage: {
-                        transaction.replace(R.id.frameLayout, menu3Fragment).commitAllowingStateLoss();
-                        break;
-                    }*/
+                    }
                 }
                 return true;
             }
