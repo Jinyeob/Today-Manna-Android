@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/37360089/103388203-07c65180-4b4b-11eb-879f-0223d0839246.png" style="float: left"/><img src="https://user-images.githubusercontent.com/37360089/103388204-09901500-4b4b-11eb-9c16-9d8bf848f2dd.png" style="float:right"/>
+<img src="https://user-images.githubusercontent.com/37360089/103388203-07c65180-4b4b-11eb-879f-0223d0839246.png" width="40%"/><img src="https://user-images.githubusercontent.com/37360089/103388204-09901500-4b4b-11eb-9c16-9d8bf848f2dd.png" width="40%"/>
 
 
 <h1 align="center">오늘의 만나 Android</h1>
