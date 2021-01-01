@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.manna.parsing2.Manna.NewMannaFragment;
 import com.manna.parsing2.Model.Mccheyne;
 import com.manna.parsing2.R;
 import com.manna.parsing2.Manna.MannaFragment;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final FragmentManager fragmentManager = getSupportFragmentManager();
 
-    private  MannaFragment mannaFragment;
+    private  NewMannaFragment mannaFragment;
     private  MccheyneFragment mccheyneFragment;
 
     public static final List<List<Mccheyne>> AllList = new ArrayList<>();
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
 
         // 첫 화면 지정
-        mannaFragment = new MannaFragment();
+        mannaFragment = new NewMannaFragment();
         fragmentManager.beginTransaction().replace(R.id.frameLayout, mannaFragment).commit();
 
         // bottomNavigationView의 아이템이 선택될 때 호출될 리스너 등록
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_manna: {
                         if(mannaFragment==null) {
-                            mannaFragment=new MannaFragment();
+                            mannaFragment=new NewMannaFragment();
                             fragmentManager.beginTransaction().add(R.id.frameLayout, mannaFragment).commit();
                         }
                         if(mannaFragment!=null) {
