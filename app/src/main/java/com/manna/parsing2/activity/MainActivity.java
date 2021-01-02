@@ -110,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplicationContext(), InfoActivity.class);
                 startActivity(intent1);
                 return true;
-            case R.id.re_login:
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                SaveSharedPreference.clearUser(MainActivity.this);
-                startActivity(intent);
-                finish();
-                return true;
+//            case R.id.re_login:
+//                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                SaveSharedPreference.clearUser(MainActivity.this);
+//                startActivity(intent);
+//                finish();
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

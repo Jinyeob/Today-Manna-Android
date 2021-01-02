@@ -1,6 +1,9 @@
 package com.manna.parsing2.Manna;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Bundle;
@@ -37,16 +40,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.manna.parsing2.Model.MannaData;
 import com.manna.parsing2.R;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class NewMannaFragment extends Fragment {
 
     private TextView _mannaTextView;
     RequestQueue queue;
-
+    private FloatingActionButton shareButton;
+    String allString="";
     public NewMannaFragment() {
         // Required empty public constructor
     }
@@ -62,6 +71,7 @@ public class NewMannaFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_manna, container, false);
 
         _mannaTextView = v.findViewById(R.id.textView);
+        shareButton=v.findViewById(R.id.button_share);
 
         queue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()).getApplicationContext());
         getManna();
@@ -71,7 +81,7 @@ public class NewMannaFragment extends Fragment {
     }
 
     public void getManna() {
-        String url = "http://3.137.156.185:3000/api/v1/today-manna";
+        String url = "http://3.137.156.185:9179/api/v1/today-manna/2021-01-02";
 
         // Request a string response from the provided URL.
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -81,9 +91,13 @@ public class NewMannaFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         System.out.println("@@@@"+response);
                         try {
-                            MannaData mannaData = new MannaData();
+                            //MannaData mannaData = new MannaData();
+
+                            String date=response.getString("date");
+                            //mannaData.setDate(date);
+
                             String verse= response.getString("verse");
-                            mannaData.setVerse(verse);
+                            //mannaData.setVerse(verse);
 
                             JSONArray contentArray = response.getJSONArray("contents");
                             StringBuilder contents= new StringBuilder();
@@ -91,9 +105,29 @@ public class NewMannaFragment extends Fragment {
                                 String content = contentArray.getString(i);
                                 contents.append(content).append("\n\n");
                             }
-                            mannaData.setContent(contents.toString());
+                            //mannaData.setContent(contents.toString());
 
-                            _mannaTextView.setText(verse+"\n\n"+contents.toString()+"\n\n");
+                            allString+=date+"\n\n"+verse+"\n\n"+contents.toString();
+
+                            _mannaTextView.setText(allString);
+
+                            //공유 버튼 리스너
+                            shareButton.setOnClickListener(new Button.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+                                    ClipData clipData = ClipData.newPlainText("TEXT", allString);
+                                    clipboardManager.setPrimaryClip(clipData);
+
+                                    Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                                    intent.setType("text/plain");
+                                    intent.putExtra(Intent.EXTRA_TEXT, allString);
+                                    Intent chooser = Intent.createChooser(intent, "공유하기");
+                                    startActivity(chooser);
+                                }
+                            });
+
+                            shareButton.show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

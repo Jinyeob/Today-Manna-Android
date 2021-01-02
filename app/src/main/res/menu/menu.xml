@@ -13,7 +13,4 @@
     <item android:id="@+id/info"
         android:title="앱 정보"
         app:showAsAction="never"/>
-    <item android:id="@+id/re_login"
-        android:title="다시 로그인"
-        app:showAsAction="never"/>
 </menu>
