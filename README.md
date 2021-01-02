@@ -207,13 +207,13 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 
 ## 📌 Screenshots
 
-| 로그인 | 메인 화면 |
+| 만나(메인) | 맥체인 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/73274473-f4b74d00-4228-11ea-8e46-e6c63f1dc522.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274471-f41eb680-4228-11ea-9380-6cbdb77fc292.jpg" width="70%"></img> |
+| ![image](https://user-images.githubusercontent.com/37360089/103459507-44649980-4d53-11eb-804d-e55c68e5a568.png) | ![image](https://user-images.githubusercontent.com/37360089/103459509-4b8ba780-4d53-11eb-90b8-203bf4cbb754.png) |
 
-| 앱 정보 | 맥체인 |
+| 공유 | 앱 정보 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/73274470-f41eb680-4228-11ea-9d10-38aec97cb23d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274472-f41eb680-4228-11ea-83a1-f73cad45cb16.jpg" width="70%"></img> |
+| ![image](https://user-images.githubusercontent.com/37360089/103459532-7e35a000-4d53-11eb-8dd9-33e44253ec13.png) | ![image](https://user-images.githubusercontent.com/37360089/103459540-8f7eac80-4d53-11eb-9d62-02661d88bff0.png) |
 
 <!--
 ## 📌 Reference
