@@ -15,6 +15,11 @@
 ## Download
 <a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="30%"/></a>
 
+## 💒 Team
+- 김진엽b : 총괄, 클라이언트 개발
+- 김홍엽b : 서버 개발
+- 김성겸b : 클라이언트 개발
+- 최윤서s : 기획, 디자인
 
 ## 📌 Version Note
 
@@ -80,7 +85,7 @@
 * 새로고침 시, 날짜가 중복돼서 출력되는 현상 해결
 
 
-
+<!--
 ## 📌 Code
 
 ### 👤 로그인
@@ -198,17 +203,19 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
                     .cookies(loginCookie)
                     .post();
 ```
+-->
 
 ## 📌 Screenshots
 
-| 로그인 | 메인 화면 |
+| 만나(메인) | 맥체인 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/73274473-f4b74d00-4228-11ea-8e46-e6c63f1dc522.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274471-f41eb680-4228-11ea-9380-6cbdb77fc292.jpg" width="70%"></img> |
+| ![image](https://user-images.githubusercontent.com/37360089/103459507-44649980-4d53-11eb-804d-e55c68e5a568.png) | ![image](https://user-images.githubusercontent.com/37360089/103459509-4b8ba780-4d53-11eb-90b8-203bf4cbb754.png) |
 
-| 앱 정보 | 맥체인 |
+| 공유 | 앱 정보 |
 |:--------:|:--------:|
-| <img src="https://user-images.githubusercontent.com/37360089/73274470-f41eb680-4228-11ea-9d10-38aec97cb23d.jpg" width="70%"></img> | <img src="https://user-images.githubusercontent.com/37360089/73274472-f41eb680-4228-11ea-83a1-f73cad45cb16.jpg" width="70%"></img> |
+| ![image](https://user-images.githubusercontent.com/37360089/103459532-7e35a000-4d53-11eb-8dd9-33e44253ec13.png) | ![image](https://user-images.githubusercontent.com/37360089/103459540-8f7eac80-4d53-11eb-9d62-02661d88bff0.png) |
 
+<!--
 ## 📌 Reference
 * 파싱: https://partnerjun.tistory.com/43?category=693285/ , https://partnerjun.tistory.com/42
 * 세부 파싱(XHR): https://partnerjun.tistory.com/51
@@ -220,3 +227,4 @@ Document doc_bible = Jsoup.connect("http://community.jbch.org/meditation/board/p
 * 커스텀 폰트: https://lktprogrammer.tistory.com/191
 * 키패드 나올때 자동 스크롤: https://tiann.tistory.com/13
 * 클립보드 복사: https://yonoo88.tistory.com/1059
+-->
