@@ -16,10 +16,10 @@
 <a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="30%"/></a>
 
 ## 💒 Team
-김진엽b : 총괄, 클라이언트 개발
-김홍엽b : 서버 개발
-김성겸b : 클라이언트 개발
-최윤서s : 기획, 디자인
+- 김진엽b : 총괄, 클라이언트 개발
+- 김홍엽b : 서버 개발
+- 김성겸b : 클라이언트 개발
+- 최윤서s : 기획, 디자인
 
 ## 📌 Version Note
 
