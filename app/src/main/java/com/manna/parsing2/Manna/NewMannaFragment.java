@@ -81,7 +81,7 @@ public class NewMannaFragment extends Fragment {
     }
 
     public void getManna() {
-        String url = "http://3.137.156.185:9179/api/v1/today-manna/2021-01-02";
+        String url = "http://3.138.184.130:9179/api/v1/today-manna/";
 
         // Request a string response from the provided URL.
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,
