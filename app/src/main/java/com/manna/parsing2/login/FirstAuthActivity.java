@@ -8,15 +8,19 @@ import android.os.Bundle;
 import com.manna.parsing2.activity.MainActivity;
 import com.manna.parsing2.R;
 
+/***
+ * Create by Jinyeob
+ * Unused Code
+ */
 public class FirstAuthActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_first_auth);
+        // setContentView(R.layout.activity_first_auth);
 
         Intent intent;
-        if(SaveSharedPreference.getUserName(FirstAuthActivity.this).length() == 0 || SaveSharedPreference.getUserPasswd(FirstAuthActivity.this).length() == 0) {
+        if (SaveSharedPreference.getUserName(FirstAuthActivity.this).length() == 0 || SaveSharedPreference.getUserPasswd(FirstAuthActivity.this).length() == 0) {
             // call Login Activity
             intent = new Intent(FirstAuthActivity.this, LoginActivity.class);
 

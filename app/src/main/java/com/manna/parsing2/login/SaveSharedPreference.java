@@ -1,8 +1,13 @@
 package com.manna.parsing2.login;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+/***
+ * Create by Jinyeob
+ * Unused Code
+ */
 public class SaveSharedPreference {
     private static final String PREF_USER_NAME = "username";
     private static final String PREF_USER_PASSWD = "userpasswd";
@@ -24,9 +29,11 @@ public class SaveSharedPreference {
     public static String getUserName(Context ctx) {
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
     }
+
     public static String getUserPasswd(Context ctx) {
         return getSharedPreferences(ctx).getString(PREF_USER_PASSWD, "");
     }
+
     // 로그아웃
     public static void clearUser(Context ctx) {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();

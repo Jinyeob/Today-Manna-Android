@@ -42,6 +42,10 @@ import java.util.Map;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
+/***
+ * Create by Jinyeob
+ * Unused Code
+ */
 public class MannaFragment extends Fragment {
 
     private TextView MannaView;

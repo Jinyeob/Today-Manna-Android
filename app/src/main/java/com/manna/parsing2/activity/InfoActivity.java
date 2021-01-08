@@ -8,6 +8,9 @@ import android.view.MenuItem;
 
 import com.manna.parsing2.R;
 
+/***
+ * Create by Jinyeob
+ */
 public class InfoActivity extends AppCompatActivity {
 
     @Override

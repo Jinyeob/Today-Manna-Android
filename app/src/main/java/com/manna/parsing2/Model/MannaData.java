@@ -2,8 +2,11 @@ package com.manna.parsing2.Model;
 
 import java.io.Serializable;
 
-public class MannaData implements Serializable {
+/***
+ * Create by Jinyeob
+ */
 
+public class MannaData implements Serializable {
 
     private String date;
     private String verse;

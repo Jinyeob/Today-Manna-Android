@@ -17,6 +17,10 @@ import com.manna.parsing2.activity.MainActivity;
 import com.manna.parsing2.R;
 import com.manna.parsing2.activity.InfoActivity;
 
+/***
+ * Create by Jinyeob
+ * Unused Code
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText idView;
