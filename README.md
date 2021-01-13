@@ -1,6 +1,6 @@
 * 본 프로젝트는 21년 1월 8일부로 다른 레포지토리에서 진행되고있습니다. 👉 https://github.com/Today-s-Manna/Today-Manna-Android-Java
 
-https://www.notion.so/9d12b0b45d5d43ce84e063dc94da66aa
+<a href="https://bit.ly/2LJ4dK0" target="_blank">소개 페이지</a>
 
 <div align="center">
 <img src="https://user-images.githubusercontent.com/37360089/103388203-07c65180-4b4b-11eb-879f-0223d0839246.png" width="40%"/><img src="https://user-images.githubusercontent.com/37360089/103388204-09901500-4b4b-11eb-9c16-9d8bf848f2dd.png" width="40%"/>
