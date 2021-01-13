@@ -1,5 +1,7 @@
 * 본 프로젝트는 21년 1월 8일부로 다른 레포지토리에서 진행되고있습니다. 👉 https://github.com/Today-s-Manna/Today-Manna-Android-Java
 
+https://www.notion.so/9d12b0b45d5d43ce84e063dc94da66aa
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/37360089/103388203-07c65180-4b4b-11eb-879f-0223d0839246.png" width="40%"/><img src="https://user-images.githubusercontent.com/37360089/103388204-09901500-4b4b-11eb-9c16-9d8bf848f2dd.png" width="40%"/>
 </div>
@@ -16,13 +18,14 @@
 
 ## Download
 <a href="https://play.google.com/store/apps/details?id=com.manna.parsing2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" width="30%"/></a>
-
+<!--
 ## 💒 Team
 - 김진엽b : 총괄, 클라이언트 개발
 - 김홍엽b : 서버 개발
 - 김성겸b : 클라이언트 개발
-- 최윤서s : 기획, 디자인
-
+- 최윤서s : 디자인
+- 양진혁b : 기획, 마케팅
+-->
 ## 📌 Version Note
 
 3.6.0
